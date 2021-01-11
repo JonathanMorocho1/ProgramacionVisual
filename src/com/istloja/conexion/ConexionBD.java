@@ -3,7 +3,7 @@ package com.istloja.conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class PruebaBD {
+public class ConexionBD {
 
     private static final String Base = "bdEjercicio1";
     private static final String usuario = "root";
