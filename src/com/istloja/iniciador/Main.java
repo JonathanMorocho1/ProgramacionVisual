@@ -3,6 +3,7 @@ package com.istloja.iniciador;
 
 import com.istloja.controlador.PersonaBD;
 import com.istloja.modelo.Persona;
+import com.istloja.vistas.GestionPersona;
 
 
 public class Main {
@@ -54,13 +55,28 @@ public class Main {
             //En esta parte solo comprobamos si la coxion fue exitosa y si los cambios realizados se guardaron
             //y damos un mensaje de persona editada correctamente.
         /*Persona personaEdi = new Persona();
+        per.setIdPersona(2);
+        per.setCedula("272727272");
+        per.setNombre("Andrews");
+        per.setApellidos("Moro");
+        per.setDireccion("loja");
+        per.setCorreo("@gmail.cm");
+        per.setTelefono("i288282");
                         
-        if(perbd.EditarPersona(personaEdi)){
+        if(perbd.actualizar(personaEdi)){
             System.out.println("Person editada con exito");
         }else{
             System.out.println("Error al editar la persona");
         }*/
         //FIN EDITAR PERSONA.
+        
+        
+        //System.out.println("PERSONAS:"+perbd.ObtenerPersonas());
+        
+        
+        GestionPersona Gpersona = new GestionPersona();
+        
+        
     }
 }
 
