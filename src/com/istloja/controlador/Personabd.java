@@ -5,7 +5,7 @@
  */
 package com.istloja.controlador;
 
-import com.istloja.conexion.PruebaBD;
+import com.istloja.conexion.ConexionBD;
 import com.istloja.modelo.Persona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,7 +37,7 @@ public class Personabd {
                 + "" + persona.getCorreo() + "', '"
                 + "" + persona.getTelefono()+"')";
         try{
-            PruebaBD conexion = new PruebaBD();
+            ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
             stm = con.createStatement();
             stm.execute(sql);
@@ -65,7 +65,7 @@ public class Personabd {
         
         String sql = "DELETE from persona where idPersona = "+persona.getIdPersona();
         try{
-            PruebaBD conexion = new PruebaBD();
+            ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
             stm = con.createStatement();
             stm.execute(sql);
@@ -89,11 +89,12 @@ public class Personabd {
         Connection con = null;
         //INSERT INTO ejercici
         
-        String sql = ("UPDATE persona SET cedula ='12121212', nombres = 'ndasdsha', apellidos = 'sdjahsdsa',"
-                + " direccion = 'abdashdbash', correo = 'fjadbsd@', telefono = '82727272' where idPersona = 2");
+        String sql = "UPDATE persona SET cedula= '" + persona.getCedula() + "',nombres= '" + persona.getNombre() + "',apellidos= '" + persona.getApellidos() + ""
+                + "', direccion= '" + persona.getDireccion() + "',correo= '" + persona.getCorreo() + "',telefono= '" + persona.getTelefono() + ""
+                + "'  WHERE (idPersona=" + persona.getIdPersona()+ ")";
         
         try{
-            PruebaBD conexion = new PruebaBD();
+            ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
             stm = con.createStatement();
             stm.execute(sql);

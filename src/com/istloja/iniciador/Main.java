@@ -1,7 +1,7 @@
 package com.istloja.iniciador;
 
 
-import com.istloja.controlador.PersonaBD;
+import com.istloja.controlador.Personabd;
 import com.istloja.modelo.Persona;
 import com.istloja.vistas.GestionPersona;
 
