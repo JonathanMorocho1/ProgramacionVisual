@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         
     
-        PersonaBD perbd = new PersonaBD();
+        Persona perbd = new Persona();
         Persona per = new Persona();
                 
         //AGREGAR PERSONA
