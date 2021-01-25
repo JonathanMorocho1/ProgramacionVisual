@@ -11,7 +11,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JPanel;  
 import javax.swing.JTextField;
 
 /**
@@ -44,7 +44,7 @@ public class GestionPersona extends JFrame{
         panel.add(panelTitulo);
         panel.add(label);
         
-       
+        
         
         panelCuerpo.setLayout(new GridLayout(7,2));
         panelCuerpo.add(new JLabel("CÉDULA"));
@@ -77,5 +77,5 @@ public class GestionPersona extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }
-    
+        
 }

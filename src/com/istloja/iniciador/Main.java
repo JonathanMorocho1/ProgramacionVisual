@@ -10,12 +10,12 @@ public class Main {
     public static void main(String[] args) {
         
     
-        Persona perbd = new Persona();
+        Personabd perbd = new Personabd();
         Persona per = new Persona();
                 
         //AGREGAR PERSONA
             //Esta parte sirve para colocarle cada atributo de la persona y guardar en la base de datos
-        /*per.setIdPersona(2);
+        per.setIdPersona(2);
         per.setCedula("1150707345");
         per.setNombre("Daniela");
         per.setApellidos("Torres");
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("Persona guardada con exito");
         }else{
             System.out.println("Error");
-        }*/
+        }
         //FIN AGREGAR PERSONA
         
         
