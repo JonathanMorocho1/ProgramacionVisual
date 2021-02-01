@@ -63,6 +63,9 @@ public class Utilidades {
 
     public boolean validarNumeros(String numero) {
 
+        if(numero.charAt(0)!='0'){
+            return false;
+        }
         if (numero.isEmpty()) {
             return false;
         } else if (numero.length() < 10) {

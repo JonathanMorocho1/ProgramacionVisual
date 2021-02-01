@@ -10,8 +10,23 @@ public class Persona {
     private String correo;
     private String telefono;
 
+    public Persona(int idPersona, String cedula, String nombre, String apellidos, String direccion, String correo, String telefono) {
+        this.idPersona = idPersona;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+
+    public Persona(){
     
+    }
     
+    public Persona(int idPersona){
+        this.idPersona = idPersona;
+    }
     
     public int getIdPersona() {
         return idPersona;
