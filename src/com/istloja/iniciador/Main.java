@@ -74,7 +74,7 @@ public class Main {
         //System.out.println("PERSONAS:"+perbd.ObtenerPersonas());
         
         
-        GestionPersona Gpersona = new GestionPersona();
+        //GestionPersona Gpersona = new GestionPersona();
         
         
     }
