@@ -8,6 +8,7 @@ package com.istloja.vistas;
 
   
 import com.istloja.modelo.Persona;
+import com.istloja.modelo.Proveedores;
 import com.istloja.modelo.Utilidades;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +29,7 @@ public class GestionPersona {
     private JTextField txtTelefono;
     private Utilidades utilidades;
     private JFrame frameGestionContable;
-
+    
     public GestionPersona(JTextField txtCedula, JTextField txtNombre, JTextField txtApellido, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono, Utilidades utilidades, JFrame frameGestionContable) {
         this.txtCedula = txtCedula;
         this.txtNombre = txtNombre;
@@ -87,6 +88,24 @@ public class GestionPersona {
     public void setTxtTelefono(JTextField txtTelefono) {
         this.txtTelefono = txtTelefono;
     }
+
+    public Utilidades getUtilidades() {
+        return utilidades;
+    }
+
+    public void setUtilidades(Utilidades utilidades) {
+        this.utilidades = utilidades;
+    }
+
+    public JFrame getFrameGestionContable() {
+        return frameGestionContable;
+    }
+
+    public void setFrameGestionContable(JFrame frameGestionContable) {
+        this.frameGestionContable = frameGestionContable;
+    }
+
+    
 
     public void limpiar() {
         txtCedula.setText("");
@@ -153,4 +172,55 @@ public class GestionPersona {
         System.out.println(persona.toString());
         return persona;
     }
+    
+    /*public Proveedores guardarEditarProveedores(){
+        if (txtRuc.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo ruc no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtRuc.requestFocus();
+            return null;
+        }
+        
+        if (txtRazonSocial.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo nombre no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombre.requestFocus();
+            return null;
+        }
+        if (txtTipoActividad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo apellido no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTipoActividad.requestFocus();
+            return null;
+        }
+        if (txtNombreRepresentanteLegal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo direccion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreRepresentanteLegal.requestFocus();
+            return null;
+        }
+        if (txtApellidoRepresentanteLegal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo correo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtApellidoRepresentanteLegal.requestFocus();
+            return null;
+        }
+        
+        if (txtTelefonoProveedores.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo telefono no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefonoProveedores.requestFocus();
+            return null;
+        }
+        if (txtCorreoProveedores.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo telefono no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCorreoProveedores.requestFocus();
+            return null;
+        }
+    
+        Proveedores proveedor = new Proveedores();
+        proveedor.setRuc(txtRuc.getText());
+        proveedor.setRazonSocial(txtRazonSocial.getText());
+        proveedor.setTipoActividad(txtTipoActividad.getText());
+        proveedor.setNombreRepresentanteLegal(txtNombreRepresentanteLegal.getText());
+        proveedor.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
+        proveedor.setTelefonoProveedor(txtTelefonoProveedores.getText());
+        proveedor.setCorreoProveedores(txtCorreoProveedores.getText());
+        System.out.println(proveedor.toString());
+        return proveedor;
+    }*/
 }

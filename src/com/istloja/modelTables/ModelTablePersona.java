@@ -6,6 +6,7 @@
 package com.istloja.modelTables;
 
 import com.istloja.modelo.Persona;
+import com.istloja.vistas.GestionPersonaV1;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,10 +16,12 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTablePersona extends AbstractTableModel{
     //ARREGLO CON EL NOMBRE DE LAS COLUMNAS
-    public String[] m_colNames = {"Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo"};
-    public List<Persona>personas; //Lista para mostrar personas
+    private String[] m_colNames = {"Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo"};
+    private List<Persona>personas; //Lista para mostrar personas
+    private GestionPersonaV1 gContable;
 
-    public ModelTablePersona(List<Persona> personas) {
+    public ModelTablePersona(List<Persona> personas,  GestionPersonaV1 gContable) {
+        this.gContable = gContable;
         this.personas = personas;
     }
     //Numero de filas que tengo en mi tabla
@@ -40,7 +43,7 @@ public class ModelTablePersona extends AbstractTableModel{
                 return persona.getCedula();
             case 1:
                 return persona.getNombre();
-            case 2:
+            case 2: 
                 return persona.getApellidos();
             case 3:
                 return persona.getDireccion();
@@ -51,11 +54,23 @@ public class ModelTablePersona extends AbstractTableModel{
         }
         return new String();
     }
-//ESTE METODO SIRVE PARA INGRESAR DEFINIR LOS NOMBRES DE LAS COLUMNAS
+//Sirve para definir los nombres de las columnas
     @Override
     public String getColumnName(int column) {
-        return m_colNames[column];
+        return m_colNames[column]; //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        gContable.clickPersona(personas.get(rowIndex));
+        return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.\
+    }
+
+    public void setPersonas(List<Persona> personasNombre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     
 }
