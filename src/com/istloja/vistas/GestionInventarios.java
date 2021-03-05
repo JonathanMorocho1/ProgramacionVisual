@@ -31,10 +31,11 @@ public class GestionInventarios {
         this.txtCantidadProductos = txtCantidadProductos;
         this.frameGestionContable = frameGestionContable;
     }
+
+
     
-    public GestionInventarios(){
     
-    }  
+    
 
     public JTextField getTxtCodigoProducto() {
         return txtCodigoProducto;

@@ -103,7 +103,7 @@ public class Proveedores {
     
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores + ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores +", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores + '}';
     }
     
     

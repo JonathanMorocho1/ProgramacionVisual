@@ -98,12 +98,7 @@ public class Proveedorbd {
         //Conexion con la base de datos
         Connection con = null;
         //INSERT INTO ejercici
-        
-       /*String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + 
-               "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellidos() + 
-                "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + 
-                "', `telefono` = '" + persona.getTelefono() + "' WHERE (`idpersona` = '"+ persona.getIdPersona() + "');";*/
- 
+       
        String sql = "UPDATE `bdejercicio1`.`proveedores` SET `ruc` = '"+proveedor.getRuc()+"',"
                + " `razon_social` = '"+proveedor.getRazonSocial()+"', `tipo_actividad` = '"+proveedor.getTipoActividad()+"',"
                + " `nombre_representante_legal` = '"+proveedor.getNombreRepresentanteLegal()+"', "
@@ -161,6 +156,73 @@ public class Proveedorbd {
             System.out.println("Error:"+ e.getMessage());
         }
 
+        return listaProveedores;
+    }
+    
+    
+    public List<Proveedores> buscarProveedoresRucCombo(String ruc) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Proveedores c = null;
+        List<Proveedores> listaProveedores = new ArrayList<Proveedores>();
+        String sql = "Select * from proveedores WHERE ruc like "+ruc+";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Proveedores();
+                c.setIdProveedores(rs.getInt(1));
+                c.setRuc(rs.getString(2));
+                c.setRazonSocial(rs.getString(3));
+                c.setTipoActividad(rs.getString(4));
+                c.setNombreRepresentanteLegal(rs.getString(5));
+                c.setApellidoRepresentanteLegal(rs.getString(6));
+                c.setTelefonoProveedor(rs.getString(7));
+                c.setCorreoProveedores(rs.getString(8));
+                listaProveedores.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return listaProveedores;
+    }
+    
+    public List<Proveedores> buscarProveedoresNombreCombo(String nombre) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Proveedores c = null;
+        List<Proveedores> listaProveedores = new ArrayList<Proveedores>();
+        String sql = "Select * from proveedores WHERE nombre_representante_legal like "+nombre+";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Proveedores();
+                c.setIdProveedores(rs.getInt(1));
+                c.setRuc(rs.getString(2));
+                c.setRazonSocial(rs.getString(3));
+                c.setTipoActividad(rs.getString(4));
+                c.setNombreRepresentanteLegal(rs.getString(5));
+                c.setApellidoRepresentanteLegal(rs.getString(6));
+                c.setTelefonoProveedor(rs.getString(7));
+                c.setCorreoProveedores(rs.getString(8));
+                listaProveedores.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
         return listaProveedores;
     }
 }

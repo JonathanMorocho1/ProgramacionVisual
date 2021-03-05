@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  * @author ANDRES
  */
 public class ModelTableInventarios extends AbstractTableModel{
-    private String[] m_colNames = {"CODIGO PRODUCTO", "DESCRIPCIÓN", "PreciosCompra", "PreciosVenta", "CantidadProductos"};
+    private String[] m_colNames = {"CODIGO", "DESCRIPCIÓN", "PRECIOS COMPRA", "PRECIOS VENTA", "CANTIDAD PRODUCTOS"};
     private List<Inventarios>inventarios; //Lista para mostrar personas
     private GestionPersonaV1 gContable;
     
@@ -37,7 +37,7 @@ public class ModelTableInventarios extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Inventarios inventario = inventarios.get(rowIndex);
+        Inventarios inventario = this.inventarios.get(rowIndex);
         switch(columnIndex){
             case 0:
                 return inventario.getCodigoProducto();

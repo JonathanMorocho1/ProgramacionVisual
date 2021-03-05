@@ -66,8 +66,12 @@ public class ModelTablePersona extends AbstractTableModel{
         return super.isCellEditable(rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.\
     }
 
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+    
     public void setPersonas(List<Persona> personasNombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.personas = personasNombre;
     }
     
     

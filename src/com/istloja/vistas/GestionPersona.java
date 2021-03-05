@@ -173,54 +173,5 @@ public class GestionPersona {
         return persona;
     }
     
-    /*public Proveedores guardarEditarProveedores(){
-        if (txtRuc.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo ruc no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtRuc.requestFocus();
-            return null;
-        }
-        
-        if (txtRazonSocial.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo nombre no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtNombre.requestFocus();
-            return null;
-        }
-        if (txtTipoActividad.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo apellido no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtTipoActividad.requestFocus();
-            return null;
-        }
-        if (txtNombreRepresentanteLegal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo direccion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtNombreRepresentanteLegal.requestFocus();
-            return null;
-        }
-        if (txtApellidoRepresentanteLegal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo correo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtApellidoRepresentanteLegal.requestFocus();
-            return null;
-        }
-        
-        if (txtTelefonoProveedores.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo telefono no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtTelefonoProveedores.requestFocus();
-            return null;
-        }
-        if (txtCorreoProveedores.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo telefono no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtCorreoProveedores.requestFocus();
-            return null;
-        }
-    
-        Proveedores proveedor = new Proveedores();
-        proveedor.setRuc(txtRuc.getText());
-        proveedor.setRazonSocial(txtRazonSocial.getText());
-        proveedor.setTipoActividad(txtTipoActividad.getText());
-        proveedor.setNombreRepresentanteLegal(txtNombreRepresentanteLegal.getText());
-        proveedor.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
-        proveedor.setTelefonoProveedor(txtTelefonoProveedores.getText());
-        proveedor.setCorreoProveedores(txtCorreoProveedores.getText());
-        System.out.println(proveedor.toString());
-        return proveedor;
-    }*/
+    /**/
 }

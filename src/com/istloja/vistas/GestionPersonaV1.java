@@ -9,7 +9,7 @@ import com.istloja.controlador.Inventariosbd;
 import com.istloja.controlador.Personabd;
 import com.istloja.controlador.Proveedorbd;
 import com.istloja.modelTables.ComunicacionPersona;
-import com.istloja.modelTables.ComunicacionVistasModelosTablas;
+import java.awt.Toolkit;
 import com.istloja.modelTables.ModelTableInventarios;
 import com.istloja.modelTables.ModelTablePersona;
 import com.istloja.modelTables.ModeloTableProveedores;
@@ -30,13 +30,14 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private Utilidades utilidades;
     private Personabd controladorPersona;
     private Persona personaEditar;
-    private Proveedores proveedoresEditar;
-    private Inventarios inventariosEditar;
-    private Proveedores proveedoresEliminar;
+    private Persona personaSeleccionada;
+    //private Proveedores proveedoresEditar;
+    private Inventarios inventariosEditarEliminar;
+    private Proveedores proveedoresEditarEliminar;
     private GestionPersona gestionPersona;
     private GestionProveedores gestionProveedores;
     private GestionInventarios gestionInventarios;
-    private Persona personaEliminar;
+    //private Persona personaEliminar;
     private ModelTablePersona modeloTablePersona;
     private ModeloTableProveedores modeloTableProveedores;
     private ModelTableInventarios modelTableInvetarios;
@@ -58,7 +59,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         utilidades = new Utilidades();
         gestionPersona = new GestionPersona(txtCedula,txtNombre,txtApellido,txtDireccion,txtCorreo,txtTelefono,utilidades,this);
         gestionProveedores = new GestionProveedores(txtRuc,txtRazonSocial,txtTipoActividad,txtNombreRepresentanteLegal,txtApellidoRepresentanteLegal,txtTelefonoProveedores,txtCorreoProveedores);
-        //gestionInventarios = new GestionInventarios(txtCodigoProducto, txtDescripcion, txtPreciosCompra, txtPreciosVenta,txtCantidadProductos);
+        gestionInventarios = new GestionInventarios(txtCodigoProducto,txtDescripcion,txtPreciosCompra,txtPreciosVenta,txtCantidadProductos, this);
     }
 
     void limpiar() {
@@ -88,7 +89,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelClientes = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         panelCuerpoRegistro = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         lblCedula = new javax.swing.JLabel();
@@ -110,12 +110,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         btnGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaClientes = new javax.swing.JTable();
-        lblBuscar = new javax.swing.JLabel();
+        lblBuscarClientecbx = new javax.swing.JLabel();
         cboxElegirBuscar = new javax.swing.JComboBox<>();
-        txtBuscar = new javax.swing.JTextField();
+        txtBuscarClientescbx = new javax.swing.JTextField();
         btnBuscarPersonaClientes = new javax.swing.JButton();
         panelProveedores = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblRuc = new javax.swing.JLabel();
         lblRazonSocial = new javax.swing.JLabel();
@@ -131,18 +130,18 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtApellidoRepresentanteLegal = new javax.swing.JTextField();
         txtTelefonoProveedores = new javax.swing.JTextField();
         txtCorreoProveedores = new javax.swing.JTextField();
-        btnGuardarProveedores = new javax.swing.JButton();
-        btnEditarProveedores = new javax.swing.JButton();
-        btnEliminarProveedores = new javax.swing.JButton();
-        btnTraerProveedor = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        lblBuscarProveedorescbx = new javax.swing.JLabel();
+        cbxElegirProveedores = new javax.swing.JComboBox<>();
+        btnBuscarProveedorescbx = new javax.swing.JButton();
+        txtBuscarProveedoresCbx = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaProveedores = new javax.swing.JTable();
+        lblRegistroProveedores = new javax.swing.JLabel();
+        btnEditarProveedores = new javax.swing.JButton();
+        btnGuardarProveedores = new javax.swing.JButton();
+        btnEliminarProveedores = new javax.swing.JButton();
+        btnTraerProveedor = new javax.swing.JButton();
         panelInventarios = new javax.swing.JPanel();
-        lblRegistroInventarios = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblCodigoProducto = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
@@ -154,15 +153,17 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtPreciosCompra = new javax.swing.JTextField();
         txtPreciosVenta = new javax.swing.JTextField();
         txtCantidadProductos = new javax.swing.JTextField();
+        lblBuscarInventarios = new javax.swing.JLabel();
+        cbxInventarios = new javax.swing.JComboBox<>();
+        txtBuscarInventarioscbx = new javax.swing.JTextField();
+        btnBuscarInventariocbx = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaInventarios = new javax.swing.JTable();
         btnGuardarInventarios = new javax.swing.JButton();
         btnEditarInventarios = new javax.swing.JButton();
         btnEliminarInventarios = new javax.swing.JButton();
-        lblBuscarInventarios = new javax.swing.JLabel();
-        cbxInventarios = new javax.swing.JComboBox<>();
-        txtBuscarInventarios = new javax.swing.JTextField();
-        btnBuscarInventario = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        btnTraerInventario = new javax.swing.JButton();
+        lblRegistroInventario = new javax.swing.JLabel();
         panelVentas = new javax.swing.JPanel();
         MenuGeneral = new javax.swing.JMenuBar();
         MenuArchivo = new javax.swing.JMenu();
@@ -203,9 +204,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblTitulo.setText("Registro de Personas");
 
-        panelCuerpoRegistro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel14.setText("Campo de Registro");
+        panelCuerpoRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Clientes"));
 
         txtNombre.setToolTipText("Ingrese el nombre del Usuario");
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -269,12 +268,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelCuerpoRegistro.setLayout(panelCuerpoRegistroLayout);
         panelCuerpoRegistroLayout.setHorizontalGroup(
             panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
+                .addGap(0, 8, Short.MAX_VALUE)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,9 +306,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelCuerpoRegistroLayout.setVerticalGroup(
             panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,9 +374,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         );
         jScrollPane1.setViewportView(TablaClientes);
 
-        lblBuscar.setText("Buscar Cliente:");
+        lblBuscarClientecbx.setText("Buscar Cliente:");
 
-        cboxElegirBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula", "Nombres", "Apellidos", "Telefono", "Correo" }));
+        cboxElegirBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Cedula", "Nombres", "Apellidos", "Telefono", "Correo" }));
         cboxElegirBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxElegirBuscarActionPerformed(evt);
@@ -401,51 +394,53 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelClientes.setLayout(panelClientesLayout);
         panelClientesLayout.setHorizontalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelClientesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(panelClientesLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelClientesLayout.createSequentialGroup()
+                                .addComponent(lblBuscarClientecbx)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboxElegirBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarPersonaClientes))
+                            .addGroup(panelClientesLayout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelClientesLayout.createSequentialGroup()
+                                        .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 82, Short.MAX_VALUE))
+                                    .addGroup(panelClientesLayout.createSequentialGroup()
+                                        .addComponent(btnGuardar)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(btnEliminar)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(btnEditar)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(btnLimpiar)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(btnTraer)
+                                        .addGap(95, 95, 95)))))))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
-                .addGap(191, 191, 191))
-            .addGroup(panelClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboxElegirBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarPersonaClientes)
-                        .addGap(20, 20, 20))))
-            .addGroup(panelClientesLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelClientesLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnEditar)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnLimpiar)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnTraer))
-                    .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGap(237, 237, 237))
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnGuardar)
@@ -454,20 +449,18 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                     .addComponent(btnTraer))
                 .addGap(18, 18, 18)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBuscar)
+                    .addComponent(lblBuscarClientecbx)
                     .addComponent(cboxElegirBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarPersonaClientes))
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         tabGeneral.addTab("Clientes", panelClientes);
 
-        jLabel1.setText("Registro Proveedores");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Proveedores"));
 
         lblRuc.setText("RUC");
 
@@ -489,40 +482,12 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
             }
         });
 
-        btnGuardarProveedores.setText("Guardar");
-        btnGuardarProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarProveedoresActionPerformed(evt);
-            }
-        });
-
-        btnEditarProveedores.setText("Editar");
-        btnEditarProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarProveedoresActionPerformed(evt);
-            }
-        });
-
-        btnEliminarProveedores.setText("Eliminar");
-        btnEliminarProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProveedoresActionPerformed(evt);
-            }
-        });
-
-        btnTraerProveedor.setText("Traer");
-        btnTraerProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTraerProveedorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTelefonoProveedores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblApellidoRepresentanteLegal, javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,31 +496,20 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                     .addComponent(lblRazonSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRuc, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCorreoProveedores, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(68, 68, 68)
+                .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtRuc)
+                    .addComponent(txtRuc, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                     .addComponent(txtRazonSocial)
-                    .addComponent(txtTipoActividad)
                     .addComponent(txtNombreRepresentanteLegal)
                     .addComponent(txtApellidoRepresentanteLegal)
                     .addComponent(txtTelefonoProveedores)
-                    .addComponent(txtCorreoProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-                .addGap(99, 99, 99))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(btnGuardarProveedores)
-                .addGap(41, 41, 41)
-                .addComponent(btnEditarProveedores)
-                .addGap(41, 41, 41)
-                .addComponent(btnEliminarProveedores)
-                .addGap(36, 36, 36)
-                .addComponent(btnTraerProveedor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCorreoProveedores)
+                    .addComponent(txtTipoActividad))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRuc)
                     .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -583,76 +537,117 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorreoProveedores)
                     .addComponent(txtCorreoProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarProveedores)
-                    .addComponent(btnEditarProveedores)
-                    .addComponent(btnEliminarProveedores)
-                    .addComponent(btnTraerProveedor))
-                .addGap(16, 16, 16))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
-        jLabel9.setText("jLabel9");
+        lblBuscarProveedorescbx.setText("Buscar Proveedores:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxElegirProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Ruc", "Nombre", " " }));
 
-        jButton1.setText("jButton1");
-
-        jTextField1.setText("jTextField1");
+        btnBuscarProveedorescbx.setText("Buscar");
+        btnBuscarProveedorescbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProveedorescbxActionPerformed(evt);
+            }
+        });
 
         tablaProveedores.setModel(modeloTableProveedores);
         jScrollPane5.setViewportView(tablaProveedores);
+
+        lblRegistroProveedores.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblRegistroProveedores.setText("Registro de Proveedores");
+
+        btnEditarProveedores.setText("Editar");
+        btnEditarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProveedoresActionPerformed(evt);
+            }
+        });
+
+        btnGuardarProveedores.setText("Guardar");
+        btnGuardarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarProveedoresActionPerformed(evt);
+            }
+        });
+
+        btnEliminarProveedores.setText("Eliminar");
+        btnEliminarProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProveedoresActionPerformed(evt);
+            }
+        });
+
+        btnTraerProveedor.setText("Traer");
+        btnTraerProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraerProveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProveedoresLayout = new javax.swing.GroupLayout(panelProveedores);
         panelProveedores.setLayout(panelProveedoresLayout);
         panelProveedoresLayout.setHorizontalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProveedoresLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblRegistroProveedores)
+                .addGap(239, 239, 239))
             .addGroup(panelProveedoresLayout.createSequentialGroup()
                 .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(btnGuardarProveedores)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnEditarProveedores)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnEliminarProveedores)
+                                .addGap(36, 36, 36)
+                                .addComponent(btnTraerProveedor))
+                            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblBuscarProveedorescbx)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxElegirProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtBuscarProveedoresCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscarProveedorescbx))))
                     .addGroup(panelProveedoresLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel1))
-                    .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panelProveedoresLayout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelProveedoresLayout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel9)
-                            .addGap(53, 53, 53)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1)))
-                    .addGroup(panelProveedoresLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGap(89, 89, 89)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         panelProveedoresLayout.setVerticalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProveedoresLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
+                .addComponent(lblRegistroProveedores)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardarProveedores)
+                    .addComponent(btnEditarProveedores)
+                    .addComponent(btnEliminarProveedores)
+                    .addComponent(btnTraerProveedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscarProveedorescbx)
+                    .addComponent(cbxElegirProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarProveedorescbx)
+                    .addComponent(txtBuscarProveedoresCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         tabGeneral.addTab("Proveedores", panelProveedores);
 
-        lblRegistroInventarios.setText("Registro Inventarios");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Inventarios"));
 
         lblCodigoProducto.setText("Codigo Producto");
 
@@ -664,11 +659,84 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
         lblCantidadProductos.setText("Cantidad Productos");
 
+        txtCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoProductoKeyTyped(evt);
+            }
+        });
+
         txtCantidadProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadProductosActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCantidadProductos, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPreciosVenta, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPreciosCompra, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigoProducto, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(68, 68, 68)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPreciosVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                    .addComponent(txtPreciosCompra, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCodigoProducto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCantidadProductos))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigoProducto)
+                    .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescripcion)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreciosCompra)
+                    .addComponent(txtPreciosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreciosVenta)
+                    .addComponent(txtPreciosVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCantidadProductos)
+                    .addComponent(txtCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
+        );
+
+        lblBuscarInventarios.setText("Buscar Inventarios:");
+
+        cbxInventarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Codigo", "Descripción" }));
+
+        txtBuscarInventarioscbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarInventarioscbxActionPerformed(evt);
+            }
+        });
+
+        btnBuscarInventariocbx.setText("Buscar");
+        btnBuscarInventariocbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarInventariocbxActionPerformed(evt);
+            }
+        });
+
+        tablaInventarios.setModel(modelTableInvetarios);
+        jScrollPane3.setViewportView(tablaInventarios);
 
         btnGuardarInventarios.setText("Guardar");
         btnGuardarInventarios.addActionListener(new java.awt.event.ActionListener() {
@@ -691,80 +759,15 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCantidadProductos, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPreciosVenta, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPreciosCompra, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCodigoProducto, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(68, 68, 68)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addComponent(txtDescripcion)
-                    .addComponent(txtPreciosCompra)
-                    .addComponent(txtPreciosVenta)
-                    .addComponent(txtCantidadProductos))
-                .addGap(99, 99, 99))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(btnGuardarInventarios)
-                .addGap(41, 41, 41)
-                .addComponent(btnEditarInventarios)
-                .addGap(41, 41, 41)
-                .addComponent(btnEliminarInventarios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigoProducto)
-                    .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescripcion)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreciosCompra)
-                    .addComponent(txtPreciosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreciosVenta)
-                    .addComponent(txtPreciosVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCantidadProductos)
-                    .addComponent(txtCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarInventarios)
-                    .addComponent(btnEditarInventarios)
-                    .addComponent(btnEliminarInventarios))
-                .addGap(118, 118, 118))
-        );
-
-        lblBuscarInventarios.setText("Buscar Inventarios");
-
-        cbxInventarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Codigo", "Descripción" }));
-
-        txtBuscarInventarios.addActionListener(new java.awt.event.ActionListener() {
+        btnTraerInventario.setText("Traer");
+        btnTraerInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarInventariosActionPerformed(evt);
+                btnTraerInventarioActionPerformed(evt);
             }
         });
 
-        btnBuscarInventario.setText("Buscar");
-
-        jTable2.setModel(modelTableInvetarios);
-        jScrollPane3.setViewportView(jTable2);
+        lblRegistroInventario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblRegistroInventario.setText("Registro de Proveedores");
 
         javax.swing.GroupLayout panelInventariosLayout = new javax.swing.GroupLayout(panelInventarios);
         panelInventarios.setLayout(panelInventariosLayout);
@@ -774,51 +777,68 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGap(16, 16, 16)
                 .addComponent(lblBuscarInventarios)
                 .addGap(18, 18, 18)
-                .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtBuscarInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscarInventario)
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventariosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-            .addGroup(panelInventariosLayout.createSequentialGroup()
                 .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventariosLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblRegistroInventarios))
+                        .addComponent(btnGuardarInventarios)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnEditarInventarios)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnEliminarInventarios)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnTraerInventario)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelInventariosLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscarInventarioscbx, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(btnBuscarInventariocbx)
+                        .addGap(24, 24, 24))))
+            .addGroup(panelInventariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRegistroInventario)
+                .addGap(255, 255, 255))
+            .addGroup(panelInventariosLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelInventariosLayout.setVerticalGroup(
             panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventariosLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lblRegistroInventarios)
+                .addGap(15, 15, 15)
+                .addComponent(lblRegistroInventario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardarInventarios)
+                        .addComponent(btnEditarInventarios)
+                        .addComponent(btnEliminarInventarios))
+                    .addComponent(btnTraerInventario))
                 .addGap(18, 18, 18)
                 .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarInventarios)
                     .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarInventario)
-                    .addComponent(txtBuscarInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscarInventariocbx)
+                    .addComponent(txtBuscarInventarioscbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
-        tabGeneral.addTab("Invetnario", panelInventarios);
+        tabGeneral.addTab("Inventario", panelInventarios);
 
         javax.swing.GroupLayout panelVentasLayout = new javax.swing.GroupLayout(panelVentas);
         panelVentas.setLayout(panelVentasLayout);
         panelVentasLayout.setHorizontalGroup(
             panelVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
+            .addGap(0, 678, Short.MAX_VALUE)
         );
         panelVentasLayout.setVerticalGroup(
             panelVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -915,122 +935,19 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabGeneral)
-                .addContainerGap())
+            .addComponent(tabGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tabGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 561, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //METODO PARA GUARDAR UNA PERSONA
-    public void GuardarPersona(){
-    if(controladorPersona.buscarPersonasCedula(txtCedula.getText()) != null ){
-            JOptionPane.showMessageDialog(rootPane, "La Persona con ese numero ya se encuentra registrada en el sistema");
-        }else{
-            Persona personaGuardar = gestionPersona.guardarEditar();
-            if(personaGuardar != null){    
-                if (controladorPersona.CrearPersona(personaGuardar)) {
-                JOptionPane.showMessageDialog(rootPane, "Persona registrada en el sistema");
-                limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "No se puede guardar la person", "Errror", JOptionPane.ERROR_MESSAGE);
-                }
-            
-        
-            }    
-        }
-    }        
-    //METODO PARA EDITAR UNA PERSONA.
-    public void EditarPersona(){
-        if(personaEditar == null){
-            JOptionPane.showMessageDialog(rootPane, "No hay una persona para editar", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Persona personaEditarLocal = gestionPersona.guardarEditar();
-        if(personaEditarLocal != null){
-            personaEditarLocal.setIdPersona(personaEditar.getIdPersona());
-            if(controladorPersona.EditarPersona(personaEditarLocal)){
-                JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
-                limpiar();
-                personaEditar = null;
-            }
-        }
-    }
-    //METODO PARA TRAER UNA PERSONA.
-    public void TraerPersona(){
-        List<Persona> obtenerPersonas = controladorPersona.obtenerPersonas();
-        personaEditar = obtenerPersonas.get(obtenerPersonas.size()-1);
-        txtCedula.setText(personaEditar.getCedula());
-        txtNombre.setText(personaEditar.getNombre());
-        txtApellido.setText(personaEditar.getApellidos());
-        txtDireccion.setText(personaEditar.getDireccion());
-        txtCorreo.setText(personaEditar.getCorreo());
-        txtTelefono.setText(personaEditar.getTelefono());
-    }
     
-    //METODO PARA BUSCAR A UNA PERSONA POR LA CEDULA.
-    public void BuscarPersonaCedula(){
-        personaEditar = controladorPersona.buscarPersonasCedula(txtCedula.getText());
-        if(personaEditar != null){
-            txtCedula.setText(personaEditar.getCedula());
-            txtNombre.setText(personaEditar.getNombre());
-            txtApellido.setText(personaEditar.getApellidos());
-            txtDireccion.setText(personaEditar.getDireccion());
-            txtCorreo.setText(personaEditar.getCorreo());
-            txtTelefono.setText(personaEditar.getTelefono());
-        
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese numero de CEDULA en la base de Datos", "Errror", JOptionPane.ERROR_MESSAGE);
-            txtCedula.setText("");
-            txtCedula.requestFocus();
-        }
-    }
-    
-    //METODO PARA ELIMINAR UNA PERSONA.
-    public void EliminarPersona(){
-        if(personaEditar == null){
-            JOptionPane.showMessageDialog(rootPane, "No hay una persona para Eliminar", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Persona personaEliminarLocal = gestionPersona.guardarEditar();
-        if(personaEliminarLocal != null){
-            personaEliminarLocal.setIdPersona(personaEditar.getIdPersona());
-            if(controladorPersona.EliminarPersona(personaEliminarLocal)){
-                JOptionPane.showMessageDialog(rootPane, "Eliminado Correctamente");
-                limpiar();
-                personaEliminar = null;
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "No se pudo ELIMINAR la Persona", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-        
-        }
-    }
-    
-    //METODO PARA BUSCAR A PERSONA POR APELLIDO.
-    public void BuscarPersonaApellido(){
-        personaEditar = controladorPersona.buscarPersonasApellido(txtApellido.getText());
-        if(personaEditar != null){
-            txtCedula.setText(personaEditar.getCedula());
-            txtNombre.setText(personaEditar.getNombre());
-            txtApellido.setText(personaEditar.getApellidos());
-            txtDireccion.setText(personaEditar.getDireccion());
-            txtCorreo.setText(personaEditar.getCorreo());
-            txtTelefono.setText(personaEditar.getTelefono());
-        
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese APELLIDO en la base de Datos", "Errror", JOptionPane.ERROR_MESSAGE);
-            txtApellido.setText(null);
-            txtApellido.requestFocus();
-        }
-    }
     private void MenuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuArchivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuArchivoActionPerformed
@@ -1123,33 +1040,29 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
     private void btnBuscarPersonaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPersonaClientesActionPerformed
         // TODO add your handling code here:
-        /*List<Persona> personasNombre = controladorPersona.buscarPersonasNombre(txtBuscar.getText());
-        //personas.add(controladorPersona.buscarPersonasCedula(txtBuscar.getText()));//Mnadamos a buscar con el controlador
-        modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-        modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO*/
         
         if(cboxElegirBuscar.getSelectedItem().equals("Cedula")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasCedulaCombo(txtBuscar.getText());
+            List<Persona> personasNombre = controladorPersona.buscarPersonasCedulaCombo(txtBuscarClientescbx.getText());
             modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
             modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
         }
         if(cboxElegirBuscar.getSelectedItem().equals("Nombres")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasNombre(txtBuscar.getText());
+            List<Persona> personasNombre = controladorPersona.buscarPersonasNombre(txtBuscarClientescbx.getText());
             modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
             modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
         }
         if(cboxElegirBuscar.getSelectedItem().equals("Apellidos")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasApellidoCombo(txtBuscar.getText());
+            List<Persona> personasNombre = controladorPersona.buscarPersonasApellidoCombo(txtBuscarClientescbx.getText());
             modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
             modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
         }
         if(cboxElegirBuscar.getSelectedItem().equals("Telefono")){
-             List<Persona> personasNombre = controladorPersona.buscarPersonasTelefono(txtBuscar.getText());
+             List<Persona> personasNombre = controladorPersona.buscarPersonasTelefono(txtBuscarClientescbx.getText());
             modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
             modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
         }
         if(cboxElegirBuscar.getSelectedItem().equals("Correo")){
-             List<Persona> personasNombre = controladorPersona.buscarPersonasCorreo(txtBuscar.getText());
+             List<Persona> personasNombre = controladorPersona.buscarPersonasCorreo(txtBuscarClientescbx.getText());
             modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
             modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
         }                   
@@ -1165,23 +1078,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
     private void btnGuardarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedoresActionPerformed
         // TODO add your handling code here:
-        Proveedores proveedores = new Proveedores();
-        proveedores.setRuc(txtRuc.getText());
-        proveedores.setRazonSocial(txtRazonSocial.getText());
-        proveedores.setTipoActividad(txtTipoActividad.getText());
-        proveedores.setNombreRepresentanteLegal(txtNombreRepresentanteLegal.getText());
-        proveedores.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
-        proveedores.setTelefonoProveedor(txtTelefonoProveedores.getText());
-        proveedores.setCorreoProveedores(txtCorreoProveedores.getText());
-        if (controladorProveedor.RegistrarProveedor(proveedores)) {
-            JOptionPane.showMessageDialog(rootPane, "Proveedor guardado con éxito del sitema.");
-            limpiarCamposProveedor();
-            modeloTableProveedores.setProveedores(controladorProveedor.obtenerProveedores());
-            modeloTableProveedores.fireTableDataChanged();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-                
+        GuardarProveedores();               
     }//GEN-LAST:event_btnGuardarProveedoresActionPerformed
 
     private void btnEditarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProveedoresActionPerformed
@@ -1205,6 +1102,294 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
     private void btnGuardarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarInventariosActionPerformed
         // TODO add your handling code here:
+        GuardarInventarios();
+    }//GEN-LAST:event_btnGuardarInventariosActionPerformed
+
+    private void btnEditarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarInventariosActionPerformed
+        // TODO add your handling code here:
+        EditarInventario();
+    }//GEN-LAST:event_btnEditarInventariosActionPerformed
+
+    private void btnEliminarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInventariosActionPerformed
+        // TODO add your handling code here:
+        EliminarInventario();
+    }//GEN-LAST:event_btnEliminarInventariosActionPerformed
+
+    private void txtBuscarInventarioscbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarInventarioscbxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarInventarioscbxActionPerformed
+
+    private void btnTraerInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraerInventarioActionPerformed
+        // TODO add your handling code here:
+        TraerInventario();
+    }//GEN-LAST:event_btnTraerInventarioActionPerformed
+
+    private void btnBuscarInventariocbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInventariocbxActionPerformed
+        // TODO add your handling code here:
+        if(cbxInventarios.getSelectedItem().equals("Codigo")){
+            List<Inventarios> inventario = controladorInventarios.buscarInvetarioCodigoCombo(txtBuscarInventarioscbx.getText());
+            modelTableInvetarios.setInventarios(inventario);//Se actuliza y el array cambia.
+            modelTableInvetarios.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
+        }
+        if(cbxInventarios.getSelectedItem().equals("Descripción")){
+            List<Inventarios> inventario = controladorInventarios.buscarInvetarioDescripcionCombo(txtBuscarInventarioscbx.getText());
+            modelTableInvetarios.setInventarios(inventario);//Se actuliza y el array cambia.
+            modelTableInvetarios.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
+        }
+    }//GEN-LAST:event_btnBuscarInventariocbxActionPerformed
+
+    private void btnBuscarProveedorescbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProveedorescbxActionPerformed
+        // TODO add your handling code here:
+        if(cbxElegirProveedores.getSelectedItem().equals("Ruc")){
+            List<Proveedores> proveedores = controladorProveedor.buscarProveedoresRucCombo(txtBuscarProveedoresCbx.getText());
+            modeloTableProveedores.setProveedores(proveedores);//Se actuliza y el array cambia.
+            modeloTableProveedores.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
+        }
+        if(cbxElegirProveedores.getSelectedItem().equals("Nombre")){
+            List<Proveedores> proveedores = controladorProveedor.buscarProveedoresNombreCombo(txtBuscarProveedoresCbx.getText());
+            modeloTableProveedores.setProveedores(proveedores);//Se actuliza y el array cambia.
+            modeloTableProveedores.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
+        }
+    }//GEN-LAST:event_btnBuscarProveedorescbxActionPerformed
+
+    private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
+        // TODO add your handling code here:
+       char c = evt.getKeyChar();
+            if (Character.isLetter(c)) {
+                getToolkit().beep();
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Solo digite números");
+            } else if (txtCodigoProducto.getText().length() >= 10) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+            }
+    }//GEN-LAST:event_txtCodigoProductoKeyTyped
+    
+//------------------------------------------------------------------------------------------------------------------------  
+    
+    //METODOS PARA QUE FUNCIONEN LOS BOTONES DEL MODULO PERSONAS CLIENTES
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    //METODO PARA GUARDAR UNA PERSONA
+    public void GuardarPersona(){
+    if(controladorPersona.buscarPersonasCedula(txtCedula.getText()) != null ){
+            JOptionPane.showMessageDialog(rootPane, "La Persona con ese numero ya se encuentra registrada en el sistema");
+        }else{
+            Persona personaGuardar = gestionPersona.guardarEditar();
+            if(personaGuardar != null){    
+                if (controladorPersona.CrearPersona(personaGuardar)) {
+                JOptionPane.showMessageDialog(rootPane, "Persona registrada en el sistema");
+                limpiar();
+                actualizarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "No se puede guardar la person", "Errror", JOptionPane.ERROR_MESSAGE);
+                }
+            
+        
+            }    
+        }
+    }        
+    //METODO PARA EDITAR UNA PERSONA.
+    public void EditarPersona(){
+        if(personaEditar == null){
+            JOptionPane.showMessageDialog(rootPane, "No hay una persona para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Persona personaEditarLocal = gestionPersona.guardarEditar();
+        if(personaEditarLocal != null){
+            personaEditarLocal.setIdPersona(personaEditar.getIdPersona());
+            if(controladorPersona.EditarPersona(personaEditarLocal)){
+                JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
+                limpiar();
+                personaEditar = null;
+                actualizarTabla();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "No se puede editar la persona");
+            }
+        }
+    }
+        
+    void actualizarTabla(){
+        List<Persona> tablaActualizada = controladorPersona.obtenerPersonas();
+        
+        modeloTablePersona.setPersonas(tablaActualizada);
+        modeloTablePersona.fireTableDataChanged();
+    }
+    //METODO PARA TRAER UNA PERSONA.
+    public void TraerPersona(){
+        List<Persona> obtenerPersonas = controladorPersona.obtenerPersonas();
+        personaEditar = obtenerPersonas.get(obtenerPersonas.size()-1);
+        txtCedula.setText(personaEditar.getCedula());
+        txtNombre.setText(personaEditar.getNombre());
+        txtApellido.setText(personaEditar.getApellidos());
+        txtDireccion.setText(personaEditar.getDireccion());
+        txtCorreo.setText(personaEditar.getCorreo());
+        txtTelefono.setText(personaEditar.getTelefono());
+    }
+    
+    //METODO PARA BUSCAR A UNA PERSONA POR LA CEDULA.
+    public void BuscarPersonaCedula(){
+        personaEditar = controladorPersona.buscarPersonasCedula(txtCedula.getText());
+        if(personaEditar != null){
+            txtCedula.setText(personaEditar.getCedula());
+            txtNombre.setText(personaEditar.getNombre());
+            txtApellido.setText(personaEditar.getApellidos());
+            txtDireccion.setText(personaEditar.getDireccion());
+            txtCorreo.setText(personaEditar.getCorreo());
+            txtTelefono.setText(personaEditar.getTelefono());
+        
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese numero de CEDULA en la base de Datos", "Errror", JOptionPane.ERROR_MESSAGE);
+            txtCedula.setText("");
+            txtCedula.requestFocus();
+        }
+    }
+    
+    //METODO PARA ELIMINAR UNA PERSONA.
+    public void EliminarPersona(){
+        if(personaEditar != null){
+            if(controladorPersona.EliminarPersona(personaEditar)){
+                JOptionPane.showMessageDialog(rootPane, "Eliminado Correctamente");
+                limpiar();
+                //personaEditar = null;
+                 actualizarTabla();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "No se pudo ELIMINAR SOURCE la Persona");
+                actualizarTabla();
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No hay persona");
+            actualizarTabla();
+            }
+    }
+    
+    public void ValoresPersona(Persona p) {
+        System.out.println("Persona"+ p.toString());
+        
+        txtCedula.setText(p.getCedula());
+        txtNombre.setText(p.getNombre());
+        txtApellido.setText(p.getApellidos());
+        txtDireccion.setText(p.getDireccion());
+        txtCorreo.setText(p.getCorreo());
+        txtTelefono.setText(p.getTelefono());
+        personaEditar = p;
+    }
+    
+    //METODO PARA BUSCAR A PERSONA POR APELLIDO.
+    public void BuscarPersonaApellido(){
+        personaEditar = controladorPersona.buscarPersonasApellido(txtApellido.getText());
+        if(personaEditar != null){
+            txtCedula.setText(personaEditar.getCedula());
+            txtNombre.setText(personaEditar.getNombre());
+            txtApellido.setText(personaEditar.getApellidos());
+            txtDireccion.setText(personaEditar.getDireccion());
+            txtCorreo.setText(personaEditar.getCorreo());
+            txtTelefono.setText(personaEditar.getTelefono());
+        
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se encontro la persona con ese APELLIDO en la base de Datos", "Errror", JOptionPane.ERROR_MESSAGE);
+            txtApellido.setText(null);
+            txtApellido.requestFocus();
+        }
+    }
+    // </editor-fold>
+    //FIN METODOS PERSONAS
+    
+    
+    
+    //METODOS PARA QUE FUNCIONES LOS BOTONES DEL MODULO PROVEEDORES
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    public void GuardarProveedores(){    
+        Proveedores proveedores = new Proveedores();
+        proveedores.setRuc(txtRuc.getText());
+        proveedores.setRazonSocial(txtRazonSocial.getText());
+        proveedores.setTipoActividad(txtTipoActividad.getText());
+        proveedores.setNombreRepresentanteLegal(txtNombreRepresentanteLegal.getText());
+        proveedores.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
+        proveedores.setTelefonoProveedor(txtTelefonoProveedores.getText());
+        proveedores.setCorreoProveedores(txtCorreoProveedores.getText());
+        if (controladorProveedor.RegistrarProveedor(proveedores)) {
+            JOptionPane.showMessageDialog(rootPane, "Proveedor guardado con éxito del sitema.");
+            limpiarCamposProveedor();
+            modeloTableProveedores.setProveedores(controladorProveedor.obtenerProveedores());
+            modeloTableProveedores.fireTableDataChanged();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }    
+    
+    public void EditarProveedor(){
+        if(proveedoresEditarEliminar == null){
+            JOptionPane.showMessageDialog(rootPane, "No hay una proveedor para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Proveedores proveedoresEditarLocal = gestionProveedores.guardarEditarProveedores();
+        if(proveedoresEditarLocal != null){
+            proveedoresEditarLocal.setIdProveedores(proveedoresEditarEliminar.getIdProveedores());
+            if(controladorProveedor.EditarProveedores(proveedoresEditarLocal)){
+                JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
+                limpiarCamposProveedor();
+                proveedoresEditarEliminar = null;
+                actualizarTablaProveedores();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "No se puede editar el PROVEEDOR SOURCE");
+            }
+            
+        }
+    }
+    public void EliminarProveedores(){
+        if(proveedoresEditarEliminar == null){
+            JOptionPane.showMessageDialog(rootPane, "No hay una persona para ELIMINAR SOURCE", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Proveedores proveedoresEliminarLocal = gestionProveedores.guardarEditarProveedores();
+        if(proveedoresEliminarLocal != null){
+            proveedoresEliminarLocal.setIdProveedores(proveedoresEditarEliminar.getIdProveedores());
+            if(controladorProveedor.EliminarProveedores(proveedoresEliminarLocal)){
+                JOptionPane.showMessageDialog(rootPane, "Eliminado Correctamente");
+                limpiarCamposProveedor();
+                proveedoresEditarEliminar = null;
+                actualizarTablaProveedores();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "No se pudo ELIMINAR la Persona SOURCE", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public void TraerProveedor(){
+        List<Proveedores> obtenerProveedores = controladorProveedor.obtenerProveedores();
+        proveedoresEditarEliminar = obtenerProveedores.get(obtenerProveedores.size()-1);
+        txtRuc.setText(proveedoresEditarEliminar.getRuc());
+        txtRazonSocial.setText(proveedoresEditarEliminar.getRazonSocial());
+        txtTipoActividad.setText(proveedoresEditarEliminar.getTipoActividad());
+        txtNombreRepresentanteLegal.setText(proveedoresEditarEliminar.getNombreRepresentanteLegal());
+        txtApellidoRepresentanteLegal.setText(proveedoresEditarEliminar.getApellidoRepresentanteLegal());
+        txtTelefonoProveedores.setText(proveedoresEditarEliminar.getTelefonoProveedor());
+        txtCorreoProveedores.setText(proveedoresEditarEliminar.getCorreoProveedores());
+    }
+    void limpiarCamposProveedor() {
+        txtRuc.setText("");
+        txtRazonSocial.setText("");
+        txtTipoActividad.setText("");
+        txtNombreRepresentanteLegal.setText("");
+        txtApellidoRepresentanteLegal.setText("");
+        txtTelefonoProveedores.setText("");
+        txtCorreoProveedores.setText("");
+    }
+    
+    void actualizarTablaProveedores(){
+        List<Proveedores> tablaActualizadaProveedores = controladorProveedor.obtenerProveedores();
+        
+        modeloTableProveedores.setProveedores(tablaActualizadaProveedores);
+        modeloTableProveedores.fireTableDataChanged();
+    }
+    // </editor-fold>
+    //FIN DE METODO PROVEEDORES
+    
+    
+    
+    //METODOS PARA QUE FUNCIONEN LOS BOTONES DEL MODULO INVENTARIOS
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    public void GuardarInventarios(){
         Inventarios inventarios = new Inventarios();
         inventarios.setCodigoProducto(txtCodigoProducto.getText());
         inventarios.setDescripcion(txtDescripcion.getText());
@@ -1219,92 +1404,67 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnGuardarInventariosActionPerformed
-
-    private void btnEditarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarInventariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarInventariosActionPerformed
-
-    private void btnEliminarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInventariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarInventariosActionPerformed
-
-    private void txtBuscarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarInventariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarInventariosActionPerformed
-
-    
-    public void TraerProveedor(){
-        List<Proveedores> obtenerProveedores = controladorProveedor.obtenerProveedores();
-        proveedoresEditar = obtenerProveedores.get(obtenerProveedores.size()-1);
-        txtRuc.setText(proveedoresEditar.getRuc());
-        txtRazonSocial.setText(proveedoresEditar.getRazonSocial());
-        txtTipoActividad.setText(proveedoresEditar.getTipoActividad());
-        txtNombreRepresentanteLegal.setText(proveedoresEditar.getNombreRepresentanteLegal());
-        txtApellidoRepresentanteLegal.setText(proveedoresEditar.getApellidoRepresentanteLegal());
-        txtTelefonoProveedores.setText(proveedoresEditar.getTelefonoProveedor());
-        txtCorreoProveedores.setText(proveedoresEditar.getCorreoProveedores());
     }
-    /*public void EditarInventario(){
-        if(inventariosEditar == null){
-            JOptionPane.showMessageDialog(rootPane, "No hay una proveedor para editar", "Error", JOptionPane.ERROR_MESSAGE);
+    
+    public void EditarInventario(){
+        if(inventariosEditarEliminar == null){
+            JOptionPane.showMessageDialog(rootPane, "No hay un Inventario para editar", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        //Inventarios inventariosEditarLocal = gestionInventarios.guardarEditarInventarios();//ME FALTA EL METODO PARA LOS CAMPOS
+        Inventarios inventariosEditarLocal = gestionInventarios.guardarEditarInventario();//ME FALTA EL METODO PARA LOS CAMPOS
         if(inventariosEditarLocal != null){
-            inventariosEditarLocal.setIdInventario(inventariosEditar.getIdInventario());
+            inventariosEditarLocal.setIdInventario(inventariosEditarEliminar.getIdInventario());
             if(controladorInventarios.EditarInventarios(inventariosEditarLocal)){
                 JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
-                limpiarCamposProveedor();
-                proveedoresEditar = null;
+                //limpiarCamposProveedor();
+                inventariosEditarEliminar = null;
+                actualizarTablaInventarios();
             }
         }
-    }*/
-    public void EditarProveedor(){
-        /*if(proveedoresEditar == null){
-            JOptionPane.showMessageDialog(rootPane, "No hay una proveedor para editar", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Proveedores proveedoresEditarLocal = gestionProveedores.guardarEditarProveedores();//ME FALTA EL METODO PARA LOS CAMPOS
-        if(proveedoresEditarLocal != null){
-            proveedoresEditarLocal.setIdProveedores(proveedoresEditar.getIdProveedores());
-            if(controladorProveedor.EditarProveedores(proveedoresEditarLocal)){
-                JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
-                limpiarCamposProveedor();
-                proveedoresEditar = null;
-            }
-        }*/
     }
-    
-    public void EliminarProveedores(){
-        if(proveedoresEditar == null){
+    public void EliminarInventario(){
+        if(inventariosEditarEliminar == null){
             JOptionPane.showMessageDialog(rootPane, "No hay una persona para Eliminar", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        /*Proveedores proveedoresEliminarLocal = gestionProveedores.guardarEditarProveedores();
-        if(proveedoresEliminarLocal != null){
-            proveedoresEliminarLocal.setIdProveedores(proveedoresEliminar.getIdProveedores());
-            if(controladorProveedor.EliminarProveedores(proveedoresEliminarLocal)){
+        Inventarios inventariosEliminarLocal = gestionInventarios.guardarEditarInventario();
+        if(inventariosEliminarLocal != null){
+            inventariosEliminarLocal.setIdInventario(inventariosEditarEliminar.getIdInventario());
+            if(controladorInventarios.EliminarInventarios(inventariosEliminarLocal)){
                 JOptionPane.showMessageDialog(rootPane, "Eliminado Correctamente");
-                limpiar();
-                proveedoresEliminar = null;
+                limpiarCamposProveedor();
+                inventariosEditarEliminar = null;
+                actualizarTablaInventarios();
             }else{
-                JOptionPane.showMessageDialog(rootPane, "No se pudo ELIMINAR la Persona", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "No se pudo ELIMINAR SOURCE la Inventario", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+        }
+    }
+    void actualizarTablaInventarios(){
+        List<Inventarios> tablaActualizadaInventarios = controladorInventarios.obtenerInventarios();
         
-        }*/
+        modelTableInvetarios.setInventarios(tablaActualizadaInventarios);
+        modelTableInvetarios.fireTableDataChanged();
     }
     
-    void limpiarCamposProveedor() {
-        txtRuc.setText("");
-        txtRazonSocial.setText("");
-        txtTipoActividad.setText("");
-        txtNombreRepresentanteLegal.setText("");
-        txtApellidoRepresentanteLegal.setText("");
-        txtTelefonoProveedores.setText("");
-        txtCorreoProveedores.setText("");
+    //METODO PARA TRAER UN INVENTARIO.
+    public void TraerInventario(){
+        List<Inventarios> obtenerInventarios = controladorInventarios.obtenerInventarios();
+        inventariosEditarEliminar = obtenerInventarios.get(obtenerInventarios.size()-1);
+        txtCodigoProducto.setText(inventariosEditarEliminar.getCodigoProducto());
+        txtDescripcion.setText(inventariosEditarEliminar.getDescripcion());
+        txtPreciosCompra.setText(inventariosEditarEliminar.getPreciosCompra());
+        txtPreciosVenta.setText(inventariosEditarEliminar.getPreciosVenta());
+        txtCantidadProductos.setText(inventariosEditarEliminar.getCantidadProductos());
     }
+            
+    // </editor-fold>
+    //FIN METODOS INVENTARIOS
+    
+    
+ 
+//------------------------------------------------------------------------------------------------------------------------
+    
     /**
      * @param args the command line arguments
      */
@@ -1355,8 +1515,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JTable TablaClientes;
     private javax.swing.JButton btnBuscarApellido;
     private javax.swing.JButton btnBuscarCedula;
-    private javax.swing.JButton btnBuscarInventario;
+    private javax.swing.JButton btnBuscarInventariocbx;
     private javax.swing.JButton btnBuscarPersonaClientes;
+    private javax.swing.JButton btnBuscarProveedorescbx;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarInventarios;
     private javax.swing.JButton btnEditarProveedores;
@@ -1368,14 +1529,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JButton btnGuardarProveedores;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnTraer;
+    private javax.swing.JButton btnTraerInventario;
     private javax.swing.JButton btnTraerProveedor;
     private javax.swing.JComboBox<String> cboxElegirBuscar;
+    private javax.swing.JComboBox<String> cbxElegirProveedores;
     private javax.swing.JComboBox<String> cbxInventarios;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1386,12 +1544,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblApellidoRepresentanteLegal;
-    private javax.swing.JLabel lblBuscar;
+    private javax.swing.JLabel lblBuscarClientecbx;
     private javax.swing.JLabel lblBuscarInventarios;
+    private javax.swing.JLabel lblBuscarProveedorescbx;
     private javax.swing.JLabel lblCantidadProductos;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblCodigoProducto;
@@ -1404,7 +1561,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JLabel lblPreciosCompra;
     private javax.swing.JLabel lblPreciosVenta;
     private javax.swing.JLabel lblRazonSocial;
-    private javax.swing.JLabel lblRegistroInventarios;
+    private javax.swing.JLabel lblRegistroInventario;
+    private javax.swing.JLabel lblRegistroProveedores;
     private javax.swing.JLabel lblRuc;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTelefonoProveedores;
@@ -1416,11 +1574,13 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JPanel panelProveedores;
     private javax.swing.JPanel panelVentas;
     private javax.swing.JTabbedPane tabGeneral;
+    private javax.swing.JTable tablaInventarios;
     private javax.swing.JTable tablaProveedores;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtApellidoRepresentanteLegal;
-    private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtBuscarInventarios;
+    private javax.swing.JTextField txtBuscarClientescbx;
+    private javax.swing.JTextField txtBuscarInventarioscbx;
+    private javax.swing.JTextField txtBuscarProveedoresCbx;
     private javax.swing.JTextField txtCantidadProductos;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCodigoProducto;
@@ -1442,42 +1602,38 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     //SETEAR EN LA CAJA
     @Override
     public void clickPersona(Persona p) {
-        System.out.println("Persona"+ p.toString());
-        
+        //System.out.println("Persona"+ p.toString());
         txtCedula.setText(p.getCedula());
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellidos());
         txtDireccion.setText(p.getDireccion());
         txtCorreo.setText(p.getCorreo());
         txtTelefono.setText(p.getTelefono());
+        personaEditar = p;
     }
-
-    public void clickProveedores(Proveedores get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
-
-      
-    
     
     //SETEAR EN LA CAJA
-//    @Override
-//    public void clickProveedores(Proveedores p) {
-//        System.out.println("Proveedores"+ p.toString());
-//        txtRuc.setText(p.getRuc());
-//        txtRazonSocial.setText(p.getRazonSocial());
-//        txtTipoActividad.setText(p.getTipoActividad());
-//        txtNombreRepresentanteLegal.setText(p.getNombreRepresentanteLegal());
-//        txtApellidoRepresentanteLegal.setText(p.getApellidoRepresentanteLegal());
-//        txtTelefonoProveedores.setText(p.getTelefonoProveedor());
-//        txtCorreoProveedores.setText(p.getCorreoProveedores());
-//        
-//    }
-//
-//    public void clickProveedores(Proveedores get) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    @Override
+    public void clickProveedores(Proveedores pr) {
+        System.out.println("Proveedores"+ pr.toString());
+        txtRuc.setText(pr.getRuc());
+        txtRazonSocial.setText(pr.getRazonSocial());
+        txtTipoActividad.setText(pr.getTipoActividad());
+        txtNombreRepresentanteLegal.setText(pr.getNombreRepresentanteLegal());
+        txtApellidoRepresentanteLegal.setText(pr.getApellidoRepresentanteLegal());
+        txtTelefonoProveedores.setText(pr.getTelefonoProveedor());
+        txtCorreoProveedores.setText(pr.getCorreoProveedores());
+        proveedoresEditarEliminar = pr;
+    }
 
-    public void clickInventarios(Inventarios get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void clickInventarios(Inventarios i) {
+        System.out.println("Inventarios"+i.toString());
+        txtCodigoProducto.setText(i.getCodigoProducto());
+        txtDescripcion.setText(i.getDescripcion());
+        txtPreciosCompra.setText(i.getPreciosCompra());
+        txtPreciosVenta.setText(i.getPreciosVenta());
+        txtCantidadProductos.setText(i.getCantidadProductos());
+        inventariosEditarEliminar = i;
     }
 }

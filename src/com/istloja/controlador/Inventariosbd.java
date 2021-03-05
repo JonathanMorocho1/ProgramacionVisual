@@ -30,8 +30,9 @@ public class Inventariosbd {
         Connection con = null;
         //INSERT INTO ejercici
         
-         String sql = "INSERT INTO `bdejercicio1`.`inventarios` (`codigo_pro`, `descripcion`, `precios_compra`, `precios_venta`, `can_productos`) "
-                + "VALUES ('" +inventarios.getCodigoProducto()+ "','"
+         String sql = "INSERT INTO `bdejercicio1`.`inventarios` "
+                 + "(`codigo_pro`, `descripcion`, `precios_compra`, `precios_venta`, `can_productos`) "
+                + "VALUES ('" + inventarios.getCodigoProducto() +  "','"
                 + "" + inventarios.getDescripcion() + "', '"
                 + "" + inventarios.getPreciosCompra() + "', '"
                 + "" + inventarios.getPreciosVenta() + "', '"
@@ -63,7 +64,8 @@ public class Inventariosbd {
         //INSERT INTO ejercici
         
         
-        String sql = "DELETE from `bdejercicio1`.`inventarios` where (`idPersona` = '"+String.valueOf(inventarios.getIdInventario())+"');";
+        String sql = "DELETE from `bdejercicio1`.`inventarios` "
+                + "where (`id_inventario` = '"+String.valueOf(inventarios.getIdInventario())+"');";
         try{
             ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
@@ -89,10 +91,10 @@ public class Inventariosbd {
         Connection con = null;
         //INSERT INTO ejercici
         
-       String sql = "UPDATE `bdejercicio1`.`inventarios` SET `cedula` = '" + inventarios.getCodigoProducto() + 
-               "', `nombres` = '" + inventarios.getDescripcion() + "', `apellidos` = '" + inventarios.getPreciosCompra() + 
-                "', `direccion` = '" + inventarios.getPreciosVenta() + "', `correo` = '" + inventarios.getCantidadProductos() + 
-               "' WHERE (`idpersona` = '"+ inventarios.getIdInventario() + "');";
+       String sql = "UPDATE `bdejercicio1`.`inventarios` SET `codigo_pro` = '" + inventarios.getCodigoProducto() + 
+               "', `descripcion` = '" + inventarios.getDescripcion() + "', `precios_compra` = '" + inventarios.getPreciosCompra() + 
+                "', `precios_venta` = '" + inventarios.getPreciosVenta() + "', `can_productos` = '" + inventarios.getCantidadProductos() + 
+               "' WHERE (`id_inventario` = '"+ inventarios.getIdInventario() + "');";
  
         try{
             ConexionBD conexion = new ConexionBD();
@@ -127,11 +129,12 @@ public class Inventariosbd {
             rs = stm.executeQuery(sql);
             while (rs.next()) {
                 Inventarios c = new Inventarios();
-                c.setCodigoProducto(rs.getString(1));
-                c.setDescripcion(rs.getString(2));
-                c.setPreciosCompra(rs.getString(3));
-                c.setPreciosVenta(rs.getString(4));
-                c.setCantidadProductos(rs.getString(5));
+                c.setIdInventario(rs.getInt(1));
+                c.setCodigoProducto(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPreciosCompra(rs.getString(4));
+                c.setPreciosVenta(rs.getString(5));
+                c.setCantidadProductos(rs.getString(6));
                 listaInventarios.add(c);
             }
             stm.close();
@@ -141,6 +144,69 @@ public class Inventariosbd {
             System.out.println("Error:"+ e.getMessage());
         }
 
+        return listaInventarios;
+    }
+    
+    public List<Inventarios> buscarInvetarioCodigoCombo(String codigo) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Inventarios c = null;
+        List<Inventarios> listaInventarios = new ArrayList<Inventarios>();
+        String sql = "Select * from inventarios WHERE codigo_pro like "+codigo+";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Inventarios();
+                c.setIdInventario(rs.getInt(1));
+                c.setCodigoProducto(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPreciosCompra(rs.getString(4));
+                c.setPreciosVenta(rs.getString(5));
+                c.setCantidadProductos(rs.getString(6));
+                listaInventarios.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return listaInventarios;
+    }
+    
+    
+    public List<Inventarios> buscarInvetarioDescripcionCombo(String descripcion) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Inventarios c = null;
+        List<Inventarios> listaInventarios = new ArrayList<Inventarios>();
+        String sql = "Select * from inventarios WHERE descripcion like "+descripcion+";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Inventarios();
+                c.setIdInventario(rs.getInt(1));
+                c.setCodigoProducto(rs.getString(2));
+                c.setDescripcion(rs.getString(3));
+                c.setPreciosCompra(rs.getString(4));
+                c.setPreciosVenta(rs.getString(5));
+                c.setCantidadProductos(rs.getString(6));
+                listaInventarios.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
         return listaInventarios;
     }
 }
