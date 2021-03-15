@@ -18,8 +18,9 @@ public class Proveedores {
     private String apellidoRepresentanteLegal;
     private String telefonoProveedor;
     private String correoProveedores;
+    private String direccionProveedores;
 
-    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String apellidoRepresentanteLegal, String telefonoProveedor, String correoProveedores) {
+    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String apellidoRepresentanteLegal, String telefonoProveedor, String correoProveedores, String direccionProveedores) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.razonSocial = razonSocial;
@@ -28,9 +29,10 @@ public class Proveedores {
         this.apellidoRepresentanteLegal = apellidoRepresentanteLegal;
         this.telefonoProveedor = telefonoProveedor;
         this.correoProveedores = correoProveedores;
+        this.direccionProveedores = direccionProveedores;
     }
 
-    
+        
     public Proveedores() {
     }
     
@@ -100,10 +102,17 @@ public class Proveedores {
         this.correoProveedores = correoProveedores;
     }
 
-    
+    public String getDireccionProveedores() {
+        return direccionProveedores;
+    }
+
+    public void setDireccionProveedores(String direccionProveedores) {
+        this.direccionProveedores = direccionProveedores;
+    }
+
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores +", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores + '}';
+        return "Proveedores{" + "idProveedores=" + idProveedores +", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores + ", direccionProveedores=" + direccionProveedores + '}';
     }
     
     

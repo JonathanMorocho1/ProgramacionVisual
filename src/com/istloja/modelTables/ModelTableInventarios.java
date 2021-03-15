@@ -15,7 +15,10 @@ import javax.swing.table.AbstractTableModel;
  * @author ANDRES
  */
 public class ModelTableInventarios extends AbstractTableModel{
-    private String[] m_colNames = {"CODIGO", "DESCRIPCIÓN", "PRECIOS COMPRA", "PRECIOS VENTA", "CANTIDAD PRODUCTOS"};
+    private String[] m_colNames = {"CODIGO", "CANTIDAD PRODUCTOS",
+        "DESCRIPCIÓN", "PRECIOS COMPRA(sinIva)",
+        "PRECIOS Compra(conIva)", "Precio Mayorista",
+        "Precio Cliente Fijo", "Precio Cliente Normal"};
     private List<Inventarios>inventarios; //Lista para mostrar personas
     private GestionPersonaV1 gContable;
     
@@ -42,13 +45,19 @@ public class ModelTableInventarios extends AbstractTableModel{
             case 0:
                 return inventario.getCodigoProducto();
             case 1:
-                return inventario.getDescripcion();
-            case 2: 
-                return inventario.getPreciosCompra();
-            case 3:
-                return inventario.getPreciosVenta();
-            case 4:
                 return inventario.getCantidadProductos();
+            case 2: 
+                return inventario.getDescripcion();
+            case 3:
+                return inventario.getPreciosCompra_sinIva();
+            case 4:
+                return inventario.getPreciosCompra_conIva();
+            case 5:
+                return inventario.getPrecioMayorista();
+            case 6:
+                return inventario.getPrecioClienteFijo();
+            case 7:
+                return inventario.getPrecioClienteNormal();
         }
         return new String();
     }

@@ -9,8 +9,9 @@ public class Persona {
     private String direccion;
     private String correo;
     private String telefono;
+    private String genero;
 
-    public Persona(int idPersona, String cedula, String nombre, String apellidos, String direccion, String correo, String telefono) {
+    public Persona(int idPersona, String cedula, String nombre, String apellidos, String direccion, String correo, String telefono, String genero) {
         this.idPersona = idPersona;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -18,6 +19,7 @@ public class Persona {
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
+        this.genero = genero;
     }
 
     public Persona(){
@@ -84,10 +86,20 @@ public class Persona {
         this.telefono = telefono;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    
     @Override
     public String toString() {
-        return "Persona{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + '}';
+        return "Persona{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", genero=" +genero+ '}';
     }
+    
 
     
     

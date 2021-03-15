@@ -31,12 +31,17 @@ public class Inventariosbd {
         //INSERT INTO ejercici
         
          String sql = "INSERT INTO `bdejercicio1`.`inventarios` "
-                 + "(`codigo_pro`, `descripcion`, `precios_compra`, `precios_venta`, `can_productos`) "
+                 + "(`codigo_pro`,`can_productos`, `descripcion`,"
+                 + " `precios_compra_sin_iva`, `precios_compra_con_iva`,"
+                 + " `precio_mayorista`, `precio_cliente_fijo`,`precio_cliente_normal`) "
                 + "VALUES ('" + inventarios.getCodigoProducto() +  "','"
+                + "" + inventarios.getCantidadProductos()+ "','"
                 + "" + inventarios.getDescripcion() + "', '"
-                + "" + inventarios.getPreciosCompra() + "', '"
-                + "" + inventarios.getPreciosVenta() + "', '"
-                + "" + inventarios.getCantidadProductos()+"')";
+                + "" + inventarios.getPreciosCompra_sinIva()+ "', '"
+                + "" + inventarios.getPreciosCompra_conIva()+ "', '"
+                + "" + inventarios.getPrecioMayorista()+ "','"
+                + "" + inventarios.getPrecioClienteFijo()+"','"
+                + "" + inventarios.getPrecioClienteNormal()+"')";
         try{
             ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
@@ -92,8 +97,13 @@ public class Inventariosbd {
         //INSERT INTO ejercici
         
        String sql = "UPDATE `bdejercicio1`.`inventarios` SET `codigo_pro` = '" + inventarios.getCodigoProducto() + 
-               "', `descripcion` = '" + inventarios.getDescripcion() + "', `precios_compra` = '" + inventarios.getPreciosCompra() + 
-                "', `precios_venta` = '" + inventarios.getPreciosVenta() + "', `can_productos` = '" + inventarios.getCantidadProductos() + 
+               "', `can_productos` = '" + inventarios.getCantidadProductos() + 
+               "', `descripcion` = '" + inventarios.getDescripcion()+ 
+               "', `precios_compra_sin_iva` = '" + inventarios.getPreciosCompra_sinIva()+ 
+               "', `precios_compra_con_iva` = '" + inventarios.getPreciosCompra_conIva()+
+               "', `precio_mayorista` = '" + inventarios.getPrecioMayorista()+
+               "', `precio_cliente_fijo` = '" + inventarios.getPrecioClienteFijo()+
+               "', `precio_cliente_normal` = '" + inventarios.getPrecioClienteNormal()+
                "' WHERE (`id_inventario` = '"+ inventarios.getIdInventario() + "');";
  
         try{
@@ -131,10 +141,13 @@ public class Inventariosbd {
                 Inventarios c = new Inventarios();
                 c.setIdInventario(rs.getInt(1));
                 c.setCodigoProducto(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPreciosCompra(rs.getString(4));
-                c.setPreciosVenta(rs.getString(5));
-                c.setCantidadProductos(rs.getString(6));
+                c.setCantidadProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPreciosCompra_sinIva(rs.getString(5));
+                c.setPreciosCompra_conIva(rs.getString(6));
+                c.setPrecioMayorista(rs.getString(7));
+                c.setPrecioClienteFijo(rs.getString(8));
+                c.setPrecioClienteNormal(rs.getString(9));
                 listaInventarios.add(c);
             }
             stm.close();
@@ -154,7 +167,7 @@ public class Inventariosbd {
         ResultSet rs = null;
         Inventarios c = null;
         List<Inventarios> listaInventarios = new ArrayList<Inventarios>();
-        String sql = "Select * from inventarios WHERE codigo_pro like "+codigo+";";
+        String sql = "Select * from inventarios WHERE codigo_pro like \"%"+codigo+"%\";";
         try {
             co = new ConexionBD().ConexionBD();
             stm = co.createStatement();
@@ -163,10 +176,13 @@ public class Inventariosbd {
                 c = new Inventarios();
                 c.setIdInventario(rs.getInt(1));
                 c.setCodigoProducto(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPreciosCompra(rs.getString(4));
-                c.setPreciosVenta(rs.getString(5));
-                c.setCantidadProductos(rs.getString(6));
+                c.setCantidadProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPreciosCompra_sinIva(rs.getString(5));
+                c.setPreciosCompra_conIva(rs.getString(6));
+                c.setPrecioMayorista(rs.getString(7));
+                c.setPrecioClienteFijo(rs.getString(8));
+                c.setPrecioClienteNormal(rs.getString(9));
                 listaInventarios.add(c);
             }
             stm.close();
@@ -186,7 +202,7 @@ public class Inventariosbd {
         ResultSet rs = null;
         Inventarios c = null;
         List<Inventarios> listaInventarios = new ArrayList<Inventarios>();
-        String sql = "Select * from inventarios WHERE descripcion like "+descripcion+";";
+        String sql = "Select * from inventarios WHERE descripcion like \"%"+descripcion+"%\";";
         try {
             co = new ConexionBD().ConexionBD();
             stm = co.createStatement();
@@ -195,10 +211,13 @@ public class Inventariosbd {
                 c = new Inventarios();
                 c.setIdInventario(rs.getInt(1));
                 c.setCodigoProducto(rs.getString(2));
-                c.setDescripcion(rs.getString(3));
-                c.setPreciosCompra(rs.getString(4));
-                c.setPreciosVenta(rs.getString(5));
-                c.setCantidadProductos(rs.getString(6));
+                c.setCantidadProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPreciosCompra_sinIva(rs.getString(5));
+                c.setPreciosCompra_conIva(rs.getString(6));
+                c.setPrecioMayorista(rs.getString(7));
+                c.setPrecioClienteFijo(rs.getString(8));
+                c.setPrecioClienteNormal(rs.getString(9));
                 listaInventarios.add(c);
             }
             stm.close();

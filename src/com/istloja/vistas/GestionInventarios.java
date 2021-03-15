@@ -17,25 +17,30 @@ import javax.swing.JTextField;
  */
 public class GestionInventarios {
     private JTextField txtCodigoProducto;
-    private JTextField txtDescripcion;
-    private JTextField txtPreciosCompra;
-    private JTextField txtPreciosVenta;
     private JTextField txtCantidadProductos;
+    private JTextField txtDescripcion;
+    private JTextField txtPreciosCompraSinIva;
+    private JTextField txtPreciosCompraConIva;
+    private JTextField txtPrecioMayorista;
+    private JTextField txtPrecioClienteFijo;
+    private JTextField txtPrecioClienteNormal;
     private JFrame frameGestionContable;
 
-    public GestionInventarios(JTextField txtCodigoProducto, JTextField txtDescripcion, JTextField txtPreciosCompra, JTextField txtPreciosVenta, JTextField txtCantidadProductos, JFrame frameGestionContable) {
+    public GestionInventarios(JTextField txtCodigoProducto,
+            JTextField txtCantidadProductos, JTextField txtDescripcion,
+            JTextField txtPreciosCompraSinIva, JTextField txtPreciosCompraConIva,
+            JTextField txtPrecioMayorista, JTextField txtPrecioClienteFijo,
+            JTextField txtPrecioClienteNormal, JFrame frameGestionContable) {
         this.txtCodigoProducto = txtCodigoProducto;
-        this.txtDescripcion = txtDescripcion;
-        this.txtPreciosCompra = txtPreciosCompra;
-        this.txtPreciosVenta = txtPreciosVenta;
         this.txtCantidadProductos = txtCantidadProductos;
+        this.txtDescripcion = txtDescripcion;
+        this.txtPreciosCompraSinIva = txtPreciosCompraSinIva;
+        this.txtPreciosCompraConIva = txtPreciosCompraConIva;
+        this.txtPrecioMayorista = txtPrecioMayorista;
+        this.txtPrecioClienteFijo = txtPrecioClienteFijo;
+        this.txtPrecioClienteNormal = txtPrecioClienteNormal;
         this.frameGestionContable = frameGestionContable;
     }
-
-
-    
-    
-    
 
     public JTextField getTxtCodigoProducto() {
         return txtCodigoProducto;
@@ -43,30 +48,6 @@ public class GestionInventarios {
 
     public void setTxtCodigoProducto(JTextField txtCodigoProducto) {
         this.txtCodigoProducto = txtCodigoProducto;
-    }
-
-    public JTextField getTxtDescripcion() {
-        return txtDescripcion;
-    }
-
-    public void setTxtDescripcion(JTextField txtDescripcion) {
-        this.txtDescripcion = txtDescripcion;
-    }
-
-    public JTextField getTxtPreciosCompra() {
-        return txtPreciosCompra;
-    }
-
-    public void setTxtPreciosCompra(JTextField txtPreciosCompra) {
-        this.txtPreciosCompra = txtPreciosCompra;
-    }
-
-    public JTextField getTxtPreciosVenta() {
-        return txtPreciosVenta;
-    }
-
-    public void setTxtPreciosVenta(JTextField txtPreciosVenta) {
-        this.txtPreciosVenta = txtPreciosVenta;
     }
 
     public JTextField getTxtCantidadProductos() {
@@ -77,6 +58,54 @@ public class GestionInventarios {
         this.txtCantidadProductos = txtCantidadProductos;
     }
 
+    public JTextField getTxtDescripcion() {
+        return txtDescripcion;
+    }
+
+    public void setTxtDescripcion(JTextField txtDescripcion) {
+        this.txtDescripcion = txtDescripcion;
+    }
+
+    public JTextField getTxtPreciosCompraSinIva() {
+        return txtPreciosCompraSinIva;
+    }
+
+    public void setTxtPreciosCompraSinIva(JTextField txtPreciosCompraSinIva) {
+        this.txtPreciosCompraSinIva = txtPreciosCompraSinIva;
+    }
+
+    public JTextField getTxtPreciosCompraConIva() {
+        return txtPreciosCompraConIva;
+    }
+
+    public void setTxtPreciosCompraConIva(JTextField txtPreciosCompraConIva) {
+        this.txtPreciosCompraConIva = txtPreciosCompraConIva;
+    }
+
+    public JTextField getTxtPrecioMayorista() {
+        return txtPrecioMayorista;
+    }
+
+    public void setTxtPrecioMayorista(JTextField txtPrecioMayorista) {
+        this.txtPrecioMayorista = txtPrecioMayorista;
+    }
+
+    public JTextField getTxtPrecioClienteFijo() {
+        return txtPrecioClienteFijo;
+    }
+
+    public void setTxtPrecioClienteFijo(JTextField txtPrecioClienteFijo) {
+        this.txtPrecioClienteFijo = txtPrecioClienteFijo;
+    }
+
+    public JTextField getTxtPrecioClienteNormal() {
+        return txtPrecioClienteNormal;
+    }
+
+    public void setTxtPrecioClienteNormal(JTextField txtPrecioClienteNormal) {
+        this.txtPrecioClienteNormal = txtPrecioClienteNormal;
+    }
+
     public JFrame getFrameGestionContable() {
         return frameGestionContable;
     }
@@ -84,7 +113,7 @@ public class GestionInventarios {
     public void setFrameGestionContable(JFrame frameGestionContable) {
         this.frameGestionContable = frameGestionContable;
     }
-   
+
     
     public Inventarios guardarEditarInventario(){
         if (txtCodigoProducto.getText().isEmpty()) {
@@ -92,34 +121,56 @@ public class GestionInventarios {
             txtCodigoProducto.requestFocus();
             return null;
         }
-        
+        if (txtCantidadProductos.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo cantidad no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCantidadProductos.requestFocus();
+            return null;
+        }
         if (txtDescripcion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo nombre no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo descripcion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtDescripcion.requestFocus();
             return null;
         }
-        if (txtPreciosCompra.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo apellido no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtPreciosCompra.requestFocus();
+        if (txtPreciosCompraSinIva.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable,
+                    "El campo precioSin no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPreciosCompraSinIva.requestFocus();
             return null;
         }
-        if (txtPreciosVenta.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo direccion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtPreciosVenta.requestFocus();
+        if (txtPreciosCompraConIva.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable,
+                    "El campo precioCon no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPreciosCompraConIva.requestFocus();
             return null;
         }
-        if (txtCantidadProductos.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo correo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
-            txtCantidadProductos.requestFocus();
+        if (txtPrecioMayorista.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable,
+                    "El campo precioMayorista no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecioMayorista.requestFocus();
+            return null;
+        }
+        if (txtPrecioClienteFijo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable,
+                    "El campo clientefijo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecioClienteFijo.requestFocus();
+            return null;
+        }
+        if (txtPrecioClienteNormal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable,
+                    "El campo clientenormal no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecioClienteNormal.requestFocus();
             return null;
         }
         
         Inventarios inventarios = new Inventarios();
         inventarios.setCodigoProducto(txtCodigoProducto.getText());
-        inventarios.setDescripcion(txtDescripcion.getText());
-        inventarios.setPreciosCompra(txtPreciosCompra.getText());
-        inventarios.setPreciosVenta(txtPreciosVenta.getText());
         inventarios.setCantidadProductos(txtCantidadProductos.getText());
+        inventarios.setDescripcion(txtDescripcion.getText());
+        inventarios.setPreciosCompra_sinIva(txtPreciosCompraSinIva.getText());
+        inventarios.setPreciosCompra_conIva(txtPreciosCompraConIva.getText());
+        inventarios.setPrecioMayorista(txtPrecioMayorista.getText());
+        inventarios.setPrecioClienteFijo(txtPrecioClienteFijo.getText());
+        inventarios.setPrecioClienteNormal(txtPrecioClienteNormal.getText());
         System.out.println(inventarios.toString());
         return inventarios;
     }

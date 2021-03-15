@@ -20,7 +20,7 @@ import com.istloja.modelo.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
+import java.awt.Color;
 /**
  *
  * @author ANDRES
@@ -57,9 +57,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         initComponents();
         this.setLocationRelativeTo(null);
         utilidades = new Utilidades();
-        gestionPersona = new GestionPersona(txtCedula,txtNombre,txtApellido,txtDireccion,txtCorreo,txtTelefono,utilidades,this);
-        gestionProveedores = new GestionProveedores(txtRuc,txtRazonSocial,txtTipoActividad,txtNombreRepresentanteLegal,txtApellidoRepresentanteLegal,txtTelefonoProveedores,txtCorreoProveedores);
-        gestionInventarios = new GestionInventarios(txtCodigoProducto,txtDescripcion,txtPreciosCompra,txtPreciosVenta,txtCantidadProductos, this);
+        gestionPersona = new GestionPersona(txtCedula,txtNombre,txtApellido,txtDireccion,txtCorreo,txtTelefono,cbxGenero,utilidades,this);
+        gestionProveedores = new GestionProveedores(txtRuc, txtRazonSocial, txtTipoActividad, txtNombreRepresentanteLegal, txtApellidoRepresentanteLegal, txtTelefonoProveedores, txtCorreoProveedores, txtDireccionProveedores, utilidades, this);
+        gestionInventarios = new GestionInventarios(txtCodigoProducto, txtCantidadProductos, txtDescripcion, txtPreciosCompraSinIva, txtPreciosCompraConIva, txtPrecioMayorista, txtPrecioClienteFijo, txtPrecioClienteNormal, this);
     }
 
     void limpiar() {
@@ -85,6 +85,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         jMenu3 = new javax.swing.JMenu();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tabGeneral = new javax.swing.JTabbedPane();
         panelClientes = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
@@ -93,8 +94,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtCedula = new javax.swing.JTextField();
         lblCedula = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
-        btnBuscarCedula = new javax.swing.JButton();
-        btnBuscarApellido = new javax.swing.JButton();
         txtApellido = new javax.swing.JTextField();
         lblApellido = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
@@ -103,6 +102,8 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         lblCorreo = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         lblTelefono = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
+        cbxGenero = new javax.swing.JComboBox<>();
         btnEditar = new javax.swing.JButton();
         btnTraer = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -113,7 +114,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         lblBuscarClientecbx = new javax.swing.JLabel();
         cboxElegirBuscar = new javax.swing.JComboBox<>();
         txtBuscarClientescbx = new javax.swing.JTextField();
-        btnBuscarPersonaClientes = new javax.swing.JButton();
         panelProveedores = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblRuc = new javax.swing.JLabel();
@@ -130,9 +130,10 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtApellidoRepresentanteLegal = new javax.swing.JTextField();
         txtTelefonoProveedores = new javax.swing.JTextField();
         txtCorreoProveedores = new javax.swing.JTextField();
+        lblDireccionProveedores = new javax.swing.JLabel();
+        txtDireccionProveedores = new javax.swing.JTextField();
         lblBuscarProveedorescbx = new javax.swing.JLabel();
         cbxElegirProveedores = new javax.swing.JComboBox<>();
-        btnBuscarProveedorescbx = new javax.swing.JButton();
         txtBuscarProveedoresCbx = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaProveedores = new javax.swing.JTable();
@@ -145,18 +146,23 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         jPanel2 = new javax.swing.JPanel();
         lblCodigoProducto = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
-        lblPreciosCompra = new javax.swing.JLabel();
-        lblPreciosVenta = new javax.swing.JLabel();
+        lblPreciosCompraSinIva = new javax.swing.JLabel();
+        lblPrecioMayorista = new javax.swing.JLabel();
         lblCantidadProductos = new javax.swing.JLabel();
         txtCodigoProducto = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtPreciosCompra = new javax.swing.JTextField();
-        txtPreciosVenta = new javax.swing.JTextField();
+        txtPreciosCompraSinIva = new javax.swing.JTextField();
+        txtPrecioMayorista = new javax.swing.JTextField();
         txtCantidadProductos = new javax.swing.JTextField();
+        lblPreciosCompraConIva = new javax.swing.JLabel();
+        txtPreciosCompraConIva = new javax.swing.JTextField();
+        lblPrecioClienteFijo = new javax.swing.JLabel();
+        txtPrecioClienteFijo = new javax.swing.JTextField();
+        lblPrecioClienteNormal = new javax.swing.JLabel();
+        txtPrecioClienteNormal = new javax.swing.JTextField();
         lblBuscarInventarios = new javax.swing.JLabel();
         cbxInventarios = new javax.swing.JComboBox<>();
         txtBuscarInventarioscbx = new javax.swing.JTextField();
-        btnBuscarInventariocbx = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaInventarios = new javax.swing.JTable();
         btnGuardarInventarios = new javax.swing.JButton();
@@ -207,16 +213,27 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelCuerpoRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Clientes"));
 
         txtNombre.setToolTipText("Ingrese el nombre del Usuario");
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtNombreMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtNombreMouseExited(evt);
             }
         });
 
         txtCedula.setToolTipText("Ingrese una cédula valida");
-        txtCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaActionPerformed(evt);
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
+            }
+        });
+        txtCedula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtCedulaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtCedulaMouseExited(evt);
             }
         });
 
@@ -224,24 +241,13 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
         lblNombre.setText("Nombre");
 
-        btnBuscarCedula.setText("Buscar Cédula");
-        btnBuscarCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarCedulaActionPerformed(evt);
-            }
-        });
-
-        btnBuscarApellido.setText("Buscar Apellido");
-        btnBuscarApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarApellidoActionPerformed(evt);
-            }
-        });
-
         txtApellido.setToolTipText("Ingresar el apellido del Usuario");
-        txtApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoActionPerformed(evt);
+        txtApellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtApellidoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtApellidoMouseExited(evt);
             }
         });
 
@@ -250,76 +256,93 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         lblDireccion.setText("Direccion");
 
         txtDireccion.setToolTipText("Dirección del Usuario");
+        txtDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtDireccionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtDireccionMouseExited(evt);
+            }
+        });
 
         txtCorreo.setToolTipText("Ingrese el correo electronico de Usuario");
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
+        txtCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtCorreoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtCorreoMouseExited(evt);
             }
         });
 
         lblCorreo.setText("Correo");
 
         txtTelefono.setToolTipText("Ingrese el telefono del Usuario");
+        txtTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtTelefonoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtTelefonoMouseExited(evt);
+            }
+        });
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         lblTelefono.setText("Telefono");
+
+        lblGenero.setText("Genéro");
+
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "No definido", "Masculino", "Femenino" }));
 
         javax.swing.GroupLayout panelCuerpoRegistroLayout = new javax.swing.GroupLayout(panelCuerpoRegistro);
         panelCuerpoRegistro.setLayout(panelCuerpoRegistroLayout);
         panelCuerpoRegistroLayout.setHorizontalGroup(
             panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre)
                             .addComponent(lblCedula))
                         .addGap(98, 98, 98)
-                        .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblApellido)
                     .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDireccion)
                             .addComponent(lblCorreo)
-                            .addComponent(lblTelefono))
+                            .addComponent(lblTelefono)
+                            .addComponent(lblGenero))
+                        .addGap(89, 89, 89)
                         .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuerpoRegistroLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                        .addComponent(lblApellido)
-                        .addGap(343, 343, 343)
-                        .addComponent(btnBuscarApellido))))
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApellido)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         panelCuerpoRegistroLayout.setVerticalGroup(
             panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCuerpoRegistroLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCedula)
+                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarCedula))
-                .addGap(18, 18, 18)
+                    .addComponent(lblCedula, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarApellido))
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDireccion)
@@ -332,7 +355,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCuerpoRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGenero)
+                    .addComponent(cbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         btnEditar.setText("Editar");
@@ -343,6 +370,14 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         });
 
         btnTraer.setText("Traer");
+        btnTraer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnTraerMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnTraerMouseReleased(evt);
+            }
+        });
         btnTraer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraerActionPerformed(evt);
@@ -350,6 +385,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
+        });
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -377,16 +417,11 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         lblBuscarClientecbx.setText("Buscar Cliente:");
 
         cboxElegirBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Cedula", "Nombres", "Apellidos", "Telefono", "Correo" }));
-        cboxElegirBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboxElegirBuscarActionPerformed(evt);
-            }
-        });
 
-        btnBuscarPersonaClientes.setText("Buscar");
-        btnBuscarPersonaClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPersonaClientesActionPerformed(evt);
+        txtBuscarClientescbx.setToolTipText("Para realizar una busqueda ingrese un parametro");
+        txtBuscarClientescbx.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarClientescbxKeyReleased(evt);
             }
         });
 
@@ -407,15 +442,14 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cboxElegirBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarPersonaClientes))
+                                .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                                .addGap(77, 77, 77))
                             .addGroup(panelClientesLayout.createSequentialGroup()
                                 .addGap(68, 68, 68)
                                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelClientesLayout.createSequentialGroup()
                                         .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 82, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(panelClientesLayout.createSequentialGroup()
                                         .addComponent(btnGuardar)
                                         .addGap(35, 35, 35)
@@ -426,21 +460,21 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                                         .addComponent(btnLimpiar)
                                         .addGap(35, 35, 35)
                                         .addComponent(btnTraer)
-                                        .addGap(95, 95, 95)))))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)))))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGap(262, 262, 262)
                 .addComponent(lblTitulo)
-                .addGap(237, 237, 237))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCuerpoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnGuardar)
@@ -451,8 +485,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarClientecbx)
                     .addComponent(cboxElegirBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPersonaClientes))
+                    .addComponent(txtBuscarClientescbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -476,35 +509,50 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
         lblCorreoProveedores.setText("Correo");
 
-        txtApellidoRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoRepresentanteLegalActionPerformed(evt);
+        txtRuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtRucMouseEntered(evt);
             }
         });
+        txtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRucKeyTyped(evt);
+            }
+        });
+
+        txtTelefonoProveedores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoProveedoresKeyTyped(evt);
+            }
+        });
+
+        lblDireccionProveedores.setText("Dirección");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTelefonoProveedores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblApellidoRepresentanteLegal, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombreRepresentanteLegal, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTipoActividad, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRazonSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRuc, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCorreoProveedores, javax.swing.GroupLayout.Alignment.LEADING))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTelefonoProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblApellidoRepresentanteLegal)
+                    .addComponent(lblNombreRepresentanteLegal)
+                    .addComponent(lblTipoActividad)
+                    .addComponent(lblRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRuc)
+                    .addComponent(lblCorreoProveedores)
+                    .addComponent(lblDireccionProveedores))
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtRuc, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(txtRuc)
                     .addComponent(txtRazonSocial)
                     .addComponent(txtNombreRepresentanteLegal)
                     .addComponent(txtApellidoRepresentanteLegal)
                     .addComponent(txtTelefonoProveedores)
                     .addComponent(txtCorreoProveedores)
-                    .addComponent(txtTipoActividad))
+                    .addComponent(txtTipoActividad)
+                    .addComponent(txtDireccionProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -537,17 +585,20 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorreoProveedores)
                     .addComponent(txtCorreoProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDireccionProveedores)
+                    .addComponent(txtDireccionProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         lblBuscarProveedorescbx.setText("Buscar Proveedores:");
 
         cbxElegirProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Ruc", "Nombre", " " }));
 
-        btnBuscarProveedorescbx.setText("Buscar");
-        btnBuscarProveedorescbx.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProveedorescbxActionPerformed(evt);
+        txtBuscarProveedoresCbx.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarProveedoresCbxKeyReleased(evt);
             }
         });
 
@@ -589,14 +640,10 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelProveedores.setLayout(panelProveedoresLayout);
         panelProveedoresLayout.setHorizontalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProveedoresLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblRegistroProveedores)
-                .addGap(239, 239, 239))
             .addGroup(panelProveedoresLayout.createSequentialGroup()
-                .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelProveedoresLayout.createSequentialGroup()
                         .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelProveedoresLayout.createSequentialGroup()
                                 .addGap(130, 130, 130)
@@ -613,22 +660,27 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxElegirProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtBuscarProveedoresCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarProveedorescbx))))
-                    .addGroup(panelProveedoresLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtBuscarProveedoresCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)))
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProveedoresLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProveedoresLayout.createSequentialGroup()
+                        .addComponent(lblRegistroProveedores)
+                        .addGap(239, 239, 239))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProveedoresLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))))
         );
         panelProveedoresLayout.setVerticalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProveedoresLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblRegistroProveedores)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarProveedores)
                     .addComponent(btnEditarProveedores)
@@ -638,7 +690,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 .addGroup(panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarProveedorescbx)
                     .addComponent(cbxElegirProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarProveedorescbx)
                     .addComponent(txtBuscarProveedoresCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -653,9 +704,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
 
         lblDescripcion.setText("Descripción");
 
-        lblPreciosCompra.setText("Precios Compra");
+        lblPreciosCompraSinIva.setText("Precios Compra Sin Iva");
 
-        lblPreciosVenta.setText("Precios Venta");
+        lblPrecioMayorista.setText("Precio Mayorista");
 
         lblCantidadProductos.setText("Cantidad Productos");
 
@@ -665,57 +716,80 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
             }
         });
 
-        txtCantidadProductos.addActionListener(new java.awt.event.ActionListener() {
+        lblPreciosCompraConIva.setText("Precios Compra Con Iva");
+
+        txtPreciosCompraConIva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadProductosActionPerformed(evt);
+                txtPreciosCompraConIvaActionPerformed(evt);
             }
         });
+
+        lblPrecioClienteFijo.setText("Precio Cliente Fijo");
+
+        lblPrecioClienteNormal.setText("Precio Cliente Normal");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCantidadProductos, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPreciosVenta, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPreciosCompra, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCodigoProducto, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(68, 68, 68)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCantidadProductos)
+                    .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigoProducto)
+                    .addComponent(lblPreciosCompraSinIva, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPreciosCompraConIva)
+                    .addComponent(lblPrecioMayorista, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrecioClienteFijo)
+                    .addComponent(lblPrecioClienteNormal))
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtPreciosVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                    .addComponent(txtPreciosCompra, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPrecioMayorista)
+                    .addComponent(txtPreciosCompraSinIva, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodigoProducto, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCantidadProductos))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(txtCantidadProductos)
+                    .addComponent(txtPreciosCompraConIva)
+                    .addComponent(txtPrecioClienteFijo)
+                    .addComponent(txtPrecioClienteNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigoProducto)
                     .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescripcion)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreciosCompra)
-                    .addComponent(txtPreciosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPreciosVenta)
-                    .addComponent(txtPreciosVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCantidadProductos)
                     .addComponent(txtCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescripcion)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreciosCompraSinIva)
+                    .addComponent(txtPreciosCompraSinIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreciosCompraConIva)
+                    .addComponent(txtPreciosCompraConIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioMayorista)
+                    .addComponent(txtPrecioMayorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioClienteFijo)
+                    .addComponent(txtPrecioClienteFijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioClienteNormal)
+                    .addComponent(txtPrecioClienteNormal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         lblBuscarInventarios.setText("Buscar Inventarios:");
@@ -727,11 +801,9 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 txtBuscarInventarioscbxActionPerformed(evt);
             }
         });
-
-        btnBuscarInventariocbx.setText("Buscar");
-        btnBuscarInventariocbx.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarInventariocbxActionPerformed(evt);
+        txtBuscarInventarioscbx.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarInventarioscbxKeyReleased(evt);
             }
         });
 
@@ -774,62 +846,60 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         panelInventariosLayout.setHorizontalGroup(
             panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventariosLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblBuscarInventarios)
-                .addGap(18, 18, 18)
                 .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventariosLayout.createSequentialGroup()
-                        .addComponent(btnGuardarInventarios)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnEditarInventarios)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnEliminarInventarios)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnTraerInventario)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
                     .addGroup(panelInventariosLayout.createSequentialGroup()
-                        .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(lblBuscarInventarios)
                         .addGap(18, 18, 18)
-                        .addComponent(txtBuscarInventarioscbx, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(btnBuscarInventariocbx)
-                        .addGap(24, 24, 24))))
-            .addGroup(panelInventariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
+                        .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInventariosLayout.createSequentialGroup()
+                                .addComponent(btnGuardarInventarios)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnEditarInventarios)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnEliminarInventarios)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnTraerInventario))
+                            .addGroup(panelInventariosLayout.createSequentialGroup()
+                                .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtBuscarInventarioscbx, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 30, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventariosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblRegistroInventario)
-                .addGap(255, 255, 255))
+                .addGap(247, 247, 247))
             .addGroup(panelInventariosLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(66, 66, 66)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelInventariosLayout.setVerticalGroup(
             panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventariosLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(lblRegistroInventario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardarInventarios)
                         .addComponent(btnEditarInventarios)
                         .addComponent(btnEliminarInventarios))
                     .addComponent(btnTraerInventario))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelInventariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarInventarios)
                     .addComponent(cbxInventarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarInventariocbx)
                     .addComponent(txtBuscarInventarioscbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         tabGeneral.addTab("Inventario", panelInventarios);
@@ -935,7 +1005,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(tabGeneral)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1012,70 +1082,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         EditarPersona();
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnBuscarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarApellidoActionPerformed
-        // TODO add your handling code here:
-        BuscarPersonaApellido();
-    }//GEN-LAST:event_btnBuscarApellidoActionPerformed
-
-    private void btnBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCedulaActionPerformed
-        // TODO add your handling code here:
-        BuscarPersonaCedula();
-    }//GEN-LAST:event_btnBuscarCedulaActionPerformed
-
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
-
-    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaActionPerformed
-
-    private void btnBuscarPersonaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPersonaClientesActionPerformed
-        // TODO add your handling code here:
-        
-        if(cboxElegirBuscar.getSelectedItem().equals("Cedula")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasCedulaCombo(txtBuscarClientescbx.getText());
-            modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-            modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cboxElegirBuscar.getSelectedItem().equals("Nombres")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasNombre(txtBuscarClientescbx.getText());
-            modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-            modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cboxElegirBuscar.getSelectedItem().equals("Apellidos")){
-            List<Persona> personasNombre = controladorPersona.buscarPersonasApellidoCombo(txtBuscarClientescbx.getText());
-            modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-            modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cboxElegirBuscar.getSelectedItem().equals("Telefono")){
-             List<Persona> personasNombre = controladorPersona.buscarPersonasTelefono(txtBuscarClientescbx.getText());
-            modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-            modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cboxElegirBuscar.getSelectedItem().equals("Correo")){
-             List<Persona> personasNombre = controladorPersona.buscarPersonasCorreo(txtBuscarClientescbx.getText());
-            modeloTablePersona.setPersonas(personasNombre);//Se actuliza y el array cambia.
-            modeloTablePersona.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }                   
-    }//GEN-LAST:event_btnBuscarPersonaClientesActionPerformed
-
-    private void cboxElegirBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxElegirBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboxElegirBuscarActionPerformed
-
-    private void txtApellidoRepresentanteLegalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoRepresentanteLegalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoRepresentanteLegalActionPerformed
-
     private void btnGuardarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedoresActionPerformed
         // TODO add your handling code here:
         GuardarProveedores();               
@@ -1095,10 +1101,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         // TODO add your handling code here:
         EliminarProveedores();
     }//GEN-LAST:event_btnEliminarProveedoresActionPerformed
-
-    private void txtCantidadProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadProductosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadProductosActionPerformed
 
     private void btnGuardarInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarInventariosActionPerformed
         // TODO add your handling code here:
@@ -1124,34 +1126,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         TraerInventario();
     }//GEN-LAST:event_btnTraerInventarioActionPerformed
 
-    private void btnBuscarInventariocbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInventariocbxActionPerformed
-        // TODO add your handling code here:
-        if(cbxInventarios.getSelectedItem().equals("Codigo")){
-            List<Inventarios> inventario = controladorInventarios.buscarInvetarioCodigoCombo(txtBuscarInventarioscbx.getText());
-            modelTableInvetarios.setInventarios(inventario);//Se actuliza y el array cambia.
-            modelTableInvetarios.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cbxInventarios.getSelectedItem().equals("Descripción")){
-            List<Inventarios> inventario = controladorInventarios.buscarInvetarioDescripcionCombo(txtBuscarInventarioscbx.getText());
-            modelTableInvetarios.setInventarios(inventario);//Se actuliza y el array cambia.
-            modelTableInvetarios.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-    }//GEN-LAST:event_btnBuscarInventariocbxActionPerformed
-
-    private void btnBuscarProveedorescbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProveedorescbxActionPerformed
-        // TODO add your handling code here:
-        if(cbxElegirProveedores.getSelectedItem().equals("Ruc")){
-            List<Proveedores> proveedores = controladorProveedor.buscarProveedoresRucCombo(txtBuscarProveedoresCbx.getText());
-            modeloTableProveedores.setProveedores(proveedores);//Se actuliza y el array cambia.
-            modeloTableProveedores.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-        if(cbxElegirProveedores.getSelectedItem().equals("Nombre")){
-            List<Proveedores> proveedores = controladorProveedor.buscarProveedoresNombreCombo(txtBuscarProveedoresCbx.getText());
-            modeloTableProveedores.setProveedores(proveedores);//Se actuliza y el array cambia.
-            modeloTableProveedores.fireTableDataChanged();//ACTUALIZA LOS DATOS QUE SE ENCUENTRAN EN EL MODELO 
-        }
-    }//GEN-LAST:event_btnBuscarProveedorescbxActionPerformed
-
     private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
         // TODO add your handling code here:
        char c = evt.getKeyChar();
@@ -1164,7 +1138,155 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
                 Toolkit.getDefaultToolkit().beep();
             }
     }//GEN-LAST:event_txtCodigoProductoKeyTyped
-    
+
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        // TODO add your handling code here:
+        if (txtCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo cedula no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCedula.requestFocus();
+        }
+        if (!utilidades.validadorDeCedula(txtCedula.getText())) {
+            JOptionPane.showMessageDialog(this, "La CEDULA ingresada no es valida", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtCedulaFocusLost
+            
+    private void txtBuscarClientescbxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClientescbxKeyReleased
+        // TODO add your handling code here:
+        buscarClienteCombo();
+    }//GEN-LAST:event_txtBuscarClientescbxKeyReleased
+
+    private void txtBuscarProveedoresCbxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProveedoresCbxKeyReleased
+        // TODO add your handling code here:
+        buscarProveedorCombo();
+    }//GEN-LAST:event_txtBuscarProveedoresCbxKeyReleased
+
+    private void txtBuscarInventarioscbxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarInventarioscbxKeyReleased
+        // TODO add your handling code here:
+        buscarInventarioCombo();
+    }//GEN-LAST:event_txtBuscarInventarioscbxKeyReleased
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+            if (Character.isLetter(c)) {
+                getToolkit().beep();
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Solo digite números");
+            } else if (txtTelefono.getText().length() >= 10) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+            }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+            if (Character.isLetter(c)) {
+                getToolkit().beep();
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Solo digite números");
+            } else if (txtRuc.getText().length() >= 10) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+            }
+    }//GEN-LAST:event_txtRucKeyTyped
+
+    private void txtTelefonoProveedoresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedoresKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+            if (Character.isLetter(c)) {
+                getToolkit().beep();
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Solo digite números");
+            } else if (txtTelefonoProveedores.getText().length() >= 10) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+            }
+    }//GEN-LAST:event_txtTelefonoProveedoresKeyTyped
+    //<editor-fold defaultstate="collapsed" desc="Generated Code">
+    private void txtCedulaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCedulaMouseEntered
+        // TODO add your handling code here:
+        txtCedula.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtCedulaMouseEntered
+
+    private void txtCedulaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCedulaMouseExited
+        // TODO add your handling code here:
+        txtCedula.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtCedulaMouseExited
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "Se han limpiado los campos");
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void btnTraerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTraerMousePressed
+        // TODO add your handling code here:
+        btnTraer.setBackground(Color.RED);
+    }//GEN-LAST:event_btnTraerMousePressed
+
+    private void btnTraerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTraerMouseReleased
+        // TODO add your handling code here:
+        btnTraer.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btnTraerMouseReleased
+
+    private void txtNombreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseEntered
+        // TODO add your handling code here:
+        txtNombre.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtNombreMouseEntered
+
+    private void txtNombreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseExited
+        // TODO add your handling code here:
+        txtNombre.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtNombreMouseExited
+
+    private void txtApellidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidoMouseEntered
+        // TODO add your handling code here:
+        txtApellido.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtApellidoMouseEntered
+
+    private void txtApellidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidoMouseExited
+        // TODO add your handling code here:
+        txtApellido.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtApellidoMouseExited
+
+    private void txtDireccionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionMouseEntered
+        // TODO add your handling code here:
+        txtDireccion.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtDireccionMouseEntered
+
+    private void txtDireccionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionMouseExited
+        // TODO add your handling code here:
+        txtDireccion.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtDireccionMouseExited
+
+    private void txtCorreoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCorreoMouseEntered
+        // TODO add your handling code here:
+        txtCorreo.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtCorreoMouseEntered
+
+    private void txtCorreoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCorreoMouseExited
+        // TODO add your handling code here:
+        txtCorreo.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtCorreoMouseExited
+
+    private void txtTelefonoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefonoMouseEntered
+        // TODO add your handling code here:
+        txtTelefono.setBackground(new Color(153, 204, 255));
+    }//GEN-LAST:event_txtTelefonoMouseEntered
+
+    private void txtTelefonoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefonoMouseExited
+        // TODO add your handling code here:
+        txtTelefono.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtTelefonoMouseExited
+
+    private void txtRucMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRucMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRucMouseEntered
+
+    private void txtPreciosCompraConIvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPreciosCompraConIvaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreciosCompraConIvaActionPerformed
+    //</editor-fold>
 //------------------------------------------------------------------------------------------------------------------------  
     
     //METODOS PARA QUE FUNCIONEN LOS BOTONES DEL MODULO PERSONAS CLIENTES
@@ -1224,6 +1346,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtDireccion.setText(personaEditar.getDireccion());
         txtCorreo.setText(personaEditar.getCorreo());
         txtTelefono.setText(personaEditar.getTelefono());
+        cbxGenero.setSelectedItem(personaEditar.getGenero());
     }
     
     //METODO PARA BUSCAR A UNA PERSONA POR LA CEDULA.
@@ -1271,6 +1394,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtDireccion.setText(p.getDireccion());
         txtCorreo.setText(p.getCorreo());
         txtTelefono.setText(p.getTelefono());
+        cbxGenero.setSelectedItem(p.getGenero());
         personaEditar = p;
     }
     
@@ -1291,6 +1415,21 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
             txtApellido.requestFocus();
         }
     }
+    
+    public void buscarClienteCombo(){
+        switch(cboxElegirBuscar.getSelectedIndex()){
+            case 1:
+                modeloTablePersona.setPersonas(controladorPersona.buscarPersonasCedulaLista(txtBuscarClientescbx.getText()));
+                modeloTablePersona.fireTableDataChanged();
+                break;
+            case 2:
+                modeloTablePersona.setPersonas(controladorPersona.buscarPersonasNombre(txtBuscarClientescbx.getText()));
+                modeloTablePersona.fireTableDataChanged();
+                break;
+            case 3:
+                break;
+        }
+    }
     // </editor-fold>
     //FIN METODOS PERSONAS
     
@@ -1298,6 +1437,21 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     
     //METODOS PARA QUE FUNCIONES LOS BOTONES DEL MODULO PROVEEDORES
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    public void buscarProveedorCombo(){
+        switch(cbxElegirProveedores.getSelectedIndex()){
+            case 0:
+                modeloTableProveedores.fireTableDataChanged();
+                break;
+            case 1:
+                modeloTableProveedores.setProveedores(controladorProveedor.buscarProveedoresRucCombo(txtBuscarProveedoresCbx.getText()));
+                modeloTableProveedores.fireTableDataChanged();
+                break;
+            case 2:
+                modeloTableProveedores.setProveedores(controladorProveedor.buscarProveedoresNombreCombo(txtBuscarProveedoresCbx.getText()));
+                modeloTableProveedores.fireTableDataChanged();
+                break;
+        }
+    }
     public void GuardarProveedores(){    
         Proveedores proveedores = new Proveedores();
         proveedores.setRuc(txtRuc.getText());
@@ -1307,6 +1461,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         proveedores.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
         proveedores.setTelefonoProveedor(txtTelefonoProveedores.getText());
         proveedores.setCorreoProveedores(txtCorreoProveedores.getText());
+        proveedores.setDireccionProveedores(txtDireccionProveedores.getText());
         if (controladorProveedor.RegistrarProveedor(proveedores)) {
             JOptionPane.showMessageDialog(rootPane, "Proveedor guardado con éxito del sitema.");
             limpiarCamposProveedor();
@@ -1365,6 +1520,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtApellidoRepresentanteLegal.setText(proveedoresEditarEliminar.getApellidoRepresentanteLegal());
         txtTelefonoProveedores.setText(proveedoresEditarEliminar.getTelefonoProveedor());
         txtCorreoProveedores.setText(proveedoresEditarEliminar.getCorreoProveedores());
+        txtDireccionProveedores.setText(proveedoresEditarEliminar.getDireccionProveedores());
     }
     void limpiarCamposProveedor() {
         txtRuc.setText("");
@@ -1374,6 +1530,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtApellidoRepresentanteLegal.setText("");
         txtTelefonoProveedores.setText("");
         txtCorreoProveedores.setText("");
+        txtDireccionProveedores.setText("");
     }
     
     void actualizarTablaProveedores(){
@@ -1389,17 +1546,36 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     
     //METODOS PARA QUE FUNCIONEN LOS BOTONES DEL MODULO INVENTARIOS
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    public void buscarInventarioCombo(){
+        switch(cbxInventarios.getSelectedIndex()){
+            case 0:
+                modelTableInvetarios.fireTableDataChanged();
+                break;
+            case 1:
+                modelTableInvetarios.setInventarios(controladorInventarios.buscarInvetarioCodigoCombo(txtBuscarInventarioscbx.getText()));
+                modelTableInvetarios.fireTableDataChanged();
+                break;
+            case 2:
+                modelTableInvetarios.setInventarios(controladorInventarios.buscarInvetarioDescripcionCombo(txtBuscarInventarioscbx.getText()));
+                modelTableInvetarios.fireTableDataChanged();
+                break;
+        }
+    }
     public void GuardarInventarios(){
         Inventarios inventarios = new Inventarios();
         inventarios.setCodigoProducto(txtCodigoProducto.getText());
-        inventarios.setDescripcion(txtDescripcion.getText());
-        inventarios.setPreciosCompra(txtPreciosCompra.getText());
-        inventarios.setPreciosVenta(txtPreciosVenta.getText());
         inventarios.setCantidadProductos(txtCantidadProductos.getText());
+        inventarios.setDescripcion(txtDescripcion.getText());
+        inventarios.setPreciosCompra_sinIva(txtPreciosCompraSinIva.getText());
+        inventarios.setPreciosCompra_conIva(txtPreciosCompraConIva.getText());
+        inventarios.setPrecioMayorista(txtPrecioMayorista.getText());
+        inventarios.setPrecioClienteFijo(txtPrecioClienteFijo.getText());
+        inventarios.setPrecioClienteNormal(txtPrecioClienteNormal.getText());
         if (controladorInventarios.CrearInventario(inventarios)) {
             JOptionPane.showMessageDialog(rootPane, "Inventario guardado con éxito del sitema.");
             //limpiarCamposInventarios();
             modelTableInvetarios.setInventarios(controladorInventarios.obtenerInventarios());
+            limpiarCamposInventarios();
             modelTableInvetarios.fireTableDataChanged();
         } else {
             JOptionPane.showMessageDialog(rootPane, "No se puede guardar el proveedor.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -1416,7 +1592,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
             inventariosEditarLocal.setIdInventario(inventariosEditarEliminar.getIdInventario());
             if(controladorInventarios.EditarInventarios(inventariosEditarLocal)){
                 JOptionPane.showMessageDialog(rootPane, "Editado Correctamente");
-                //limpiarCamposProveedor();
+                limpiarCamposInventarios();
                 inventariosEditarEliminar = null;
                 actualizarTablaInventarios();
             }
@@ -1452,10 +1628,23 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         List<Inventarios> obtenerInventarios = controladorInventarios.obtenerInventarios();
         inventariosEditarEliminar = obtenerInventarios.get(obtenerInventarios.size()-1);
         txtCodigoProducto.setText(inventariosEditarEliminar.getCodigoProducto());
-        txtDescripcion.setText(inventariosEditarEliminar.getDescripcion());
-        txtPreciosCompra.setText(inventariosEditarEliminar.getPreciosCompra());
-        txtPreciosVenta.setText(inventariosEditarEliminar.getPreciosVenta());
         txtCantidadProductos.setText(inventariosEditarEliminar.getCantidadProductos());
+        txtDescripcion.setText(inventariosEditarEliminar.getDescripcion());
+        txtPreciosCompraSinIva.setText(inventariosEditarEliminar.getPreciosCompra_sinIva());
+        txtPreciosCompraConIva.setText(inventariosEditarEliminar.getPreciosCompra_conIva());
+        txtPrecioMayorista.setText(inventariosEditarEliminar.getPrecioMayorista());
+        txtPrecioClienteFijo.setText(inventariosEditarEliminar.getPrecioClienteFijo());
+        txtPrecioClienteNormal.setText(inventariosEditarEliminar.getPrecioClienteNormal());
+    }
+    void limpiarCamposInventarios() {
+        txtCodigoProducto.setText("");
+        txtCantidadProductos.setText("");
+        txtDescripcion.setText("");
+        txtPreciosCompraSinIva.setText("");
+        txtPreciosCompraConIva.setText("");
+        txtPrecioMayorista.setText("");
+        txtPrecioClienteFijo.setText("");
+        txtPrecioClienteNormal.setText("");
     }
             
     // </editor-fold>
@@ -1513,11 +1702,6 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JMenuItem MenuItemSalir;
     private javax.swing.JMenuItem MenuItemTraer;
     private javax.swing.JTable TablaClientes;
-    private javax.swing.JButton btnBuscarApellido;
-    private javax.swing.JButton btnBuscarCedula;
-    private javax.swing.JButton btnBuscarInventariocbx;
-    private javax.swing.JButton btnBuscarPersonaClientes;
-    private javax.swing.JButton btnBuscarProveedorescbx;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarInventarios;
     private javax.swing.JButton btnEditarProveedores;
@@ -1531,8 +1715,10 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JButton btnTraer;
     private javax.swing.JButton btnTraerInventario;
     private javax.swing.JButton btnTraerProveedor;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboxElegirBuscar;
     private javax.swing.JComboBox<String> cbxElegirProveedores;
+    private javax.swing.JComboBox<String> cbxGenero;
     private javax.swing.JComboBox<String> cbxInventarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1556,10 +1742,15 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JLabel lblCorreoProveedores;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblDireccionProveedores;
+    private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreRepresentanteLegal;
-    private javax.swing.JLabel lblPreciosCompra;
-    private javax.swing.JLabel lblPreciosVenta;
+    private javax.swing.JLabel lblPrecioClienteFijo;
+    private javax.swing.JLabel lblPrecioClienteNormal;
+    private javax.swing.JLabel lblPrecioMayorista;
+    private javax.swing.JLabel lblPreciosCompraConIva;
+    private javax.swing.JLabel lblPreciosCompraSinIva;
     private javax.swing.JLabel lblRazonSocial;
     private javax.swing.JLabel lblRegistroInventario;
     private javax.swing.JLabel lblRegistroProveedores;
@@ -1588,10 +1779,14 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     private javax.swing.JTextField txtCorreoProveedores;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDireccionProveedores;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreRepresentanteLegal;
-    private javax.swing.JTextField txtPreciosCompra;
-    private javax.swing.JTextField txtPreciosVenta;
+    private javax.swing.JTextField txtPrecioClienteFijo;
+    private javax.swing.JTextField txtPrecioClienteNormal;
+    private javax.swing.JTextField txtPrecioMayorista;
+    private javax.swing.JTextField txtPreciosCompraConIva;
+    private javax.swing.JTextField txtPreciosCompraSinIva;
     private javax.swing.JTextField txtRazonSocial;
     private javax.swing.JTextField txtRuc;
     private javax.swing.JTextField txtTelefono;
@@ -1623,6 +1818,7 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
         txtApellidoRepresentanteLegal.setText(pr.getApellidoRepresentanteLegal());
         txtTelefonoProveedores.setText(pr.getTelefonoProveedor());
         txtCorreoProveedores.setText(pr.getCorreoProveedores());
+        txtDireccionProveedores.setText(pr.getDireccionProveedores());
         proveedoresEditarEliminar = pr;
     }
 
@@ -1630,10 +1826,13 @@ public class GestionPersonaV1 extends javax.swing.JFrame implements Comunicacion
     public void clickInventarios(Inventarios i) {
         System.out.println("Inventarios"+i.toString());
         txtCodigoProducto.setText(i.getCodigoProducto());
-        txtDescripcion.setText(i.getDescripcion());
-        txtPreciosCompra.setText(i.getPreciosCompra());
-        txtPreciosVenta.setText(i.getPreciosVenta());
         txtCantidadProductos.setText(i.getCantidadProductos());
+        txtDescripcion.setText(i.getDescripcion());
+        txtPreciosCompraSinIva.setText(i.getPreciosCompra_sinIva());
+        txtPreciosCompraConIva.setText(i.getPreciosCompra_conIva());
+        txtPrecioMayorista.setText(i.getPrecioMayorista());
+        txtPrecioClienteFijo.setText(i.getPrecioClienteFijo());
+        txtPrecioClienteNormal.setText(i.getPrecioClienteNormal());
         inventariosEditarEliminar = i;
     }
 }

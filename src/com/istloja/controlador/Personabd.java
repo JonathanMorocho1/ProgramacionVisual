@@ -31,14 +31,16 @@ public class Personabd {
         Connection con = null;
         //INSERT INTO ejercici
         
-         String sql = "INSERT INTO `bdejercicio1`.`persona` (`idPersona`,`cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) "
+         String sql = "INSERT INTO `bdejercicio1`.`persona` (`idPersona`,`cedula`, `nombres`, `apellidos`,"
+                 + " `direccion`, `correo`, `telefono`, `genero`) "
                 + "VALUES ('" + String.valueOf(persona.getIdPersona()) + "','"
                 + "" + persona.getCedula() + "', '"
                 + "" + persona.getNombre() + "', '"
                 + "" + persona.getApellidos() + "', '"
                 + "" + persona.getDireccion() + "', '"
                 + "" + persona.getCorreo() + "', '"
-                + "" + persona.getTelefono()+"')";
+                + "" + persona.getTelefono()+"','" 
+                + "" + persona.getGenero()+"')";
         try{
             ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
@@ -92,10 +94,11 @@ public class Personabd {
         Connection con = null;
         //INSERT INTO ejercici
         
-       String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + 
+        String sql = "UPDATE `bdejercicio1`.`persona` SET `cedula` = '" + persona.getCedula() + 
                "', `nombres` = '" + persona.getNombre() + "', `apellidos` = '" + persona.getApellidos() + 
                 "', `direccion` = '" + persona.getDireccion() + "', `correo` = '" + persona.getCorreo() + 
-                "', `telefono` = '" + persona.getTelefono() + "' WHERE (`idpersona` = '"+ persona.getIdPersona() + "');";
+                "', `telefono` = '" + persona.getTelefono() + "', `genero` = '" + persona.getGenero() + 
+               "' WHERE (`idpersona` = '"+ persona.getIdPersona() + "');";
  
         try{
             ConexionBD conexion = new ConexionBD();
@@ -138,6 +141,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -171,6 +175,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
             }
             stm.close();
             rs.close();
@@ -201,6 +206,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
             }
             stm.close();
             rs.close();
@@ -235,6 +241,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -268,6 +275,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -302,6 +310,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -337,6 +346,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -371,6 +381,7 @@ public class Personabd {
                 c.setDireccion(rs.getString(5));
                 c.setCorreo(rs.getString(6));
                 c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
                 listaPersonas.add(c);
             }
             stm.close();
@@ -382,4 +393,37 @@ public class Personabd {
 
         return listaPersonas;
     }//Fin traer datos
+    
+    public List<Persona> buscarPersonasCedulaLista(String Cedula) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Persona c = null;
+        List<Persona> personasEncontradas = new ArrayList<Persona>();
+        String sql = "Select * from persona WHERE cedula like \"%"+Cedula+"%\";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Persona();
+                c.setIdPersona(rs.getInt(1));
+                c.setCedula(rs.getString(2));
+                c.setNombre(rs.getString(3));
+                c.setApellidos(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setCorreo(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setGenero(rs.getString(8));
+                personasEncontradas.add(c);
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return personasEncontradas;
+    }
 }

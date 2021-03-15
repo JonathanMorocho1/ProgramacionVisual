@@ -10,6 +10,7 @@ package com.istloja.vistas;
 import com.istloja.modelo.Persona;
 import com.istloja.modelo.Proveedores;
 import com.istloja.modelo.Utilidades;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,16 +28,18 @@ public class GestionPersona {
     private JTextField txtDireccion;
     private JTextField txtCorreo;
     private JTextField txtTelefono;
+    private JComboBox cbxGenero; 
     private Utilidades utilidades;
     private JFrame frameGestionContable;
     
-    public GestionPersona(JTextField txtCedula, JTextField txtNombre, JTextField txtApellido, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono, Utilidades utilidades, JFrame frameGestionContable) {
+    public GestionPersona(JTextField txtCedula, JTextField txtNombre, JTextField txtApellido, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono, JComboBox cbxGenero,Utilidades utilidades, JFrame frameGestionContable) {
         this.txtCedula = txtCedula;
         this.txtNombre = txtNombre;
         this.txtApellido = txtApellido;
         this.txtDireccion = txtDireccion;
         this.txtCorreo = txtCorreo;
         this.txtTelefono = txtTelefono;
+        this.cbxGenero = cbxGenero;
         this.utilidades = utilidades;
         this.frameGestionContable = frameGestionContable;
     }
@@ -89,6 +92,14 @@ public class GestionPersona {
         this.txtTelefono = txtTelefono;
     }
 
+    public JComboBox getCbxGenero() {
+        return cbxGenero;
+    }
+
+    public void setCbxGenero(JComboBox cbxGenero) {
+        this.cbxGenero = cbxGenero;
+    }
+    
     public Utilidades getUtilidades() {
         return utilidades;
     }
@@ -114,6 +125,7 @@ public class GestionPersona {
         txtDireccion.setText("");
         txtCorreo.setText("");
         txtTelefono.setText("");
+        cbxGenero.setSelectedItem("Seleccionar:");
     }
     
     public Persona guardarEditar(){
@@ -169,6 +181,7 @@ public class GestionPersona {
         persona.setDireccion(txtDireccion.getText());
         persona.setCorreo(txtCorreo.getText());
         persona.setTelefono(txtTelefono.getText());
+        persona.setGenero(cbxGenero.getSelectedItem().toString());
         System.out.println(persona.toString());
         return persona;
     }

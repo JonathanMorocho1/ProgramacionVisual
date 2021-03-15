@@ -29,23 +29,16 @@ public class Proveedorbd {
         Connection con = null;
         //INSERT INTO ejercici
         
-         /*String sql = "INSERT INTO `bdejercicio1`.`proveedor` (`idPersona`,`cedula`, `nombres`, `apellidos`, `direccion`, `correo`, `telefono`) "
-                + "VALUES ('" + String.valueOf(persona.getIdPersona()) + "','"
-                + "" + persona.getCedula() + "', '"
-                + "" + persona.getNombre() + "', '"
-                + "" + persona.getApellidos() + "', '"
-                + "" + persona.getDireccion() + "', '"
-                + "" + persona.getCorreo() + "', '"
-                + "" + persona.getTelefono()+"')";*/
          
-        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`) "
+        String sql = "INSERT INTO `bdejercicio1`.`proveedores` (`ruc`, `razon_social`, `tipo_actividad`, `nombre_representante_legal`, `apellido_representante_legal`, `telefono`, `correo`,`direccion`) "
                 + "VALUES ('"+proveedor.getRuc()+"',"
                 + " '"+proveedor.getRazonSocial()+"',"
                 + " '"+proveedor.getTipoActividad()+"',"
                 + " '"+proveedor.getNombreRepresentanteLegal()+"',"
                 + " '"+proveedor.getApellidoRepresentanteLegal()+"',"
                 + " '"+proveedor.getTelefonoProveedor()+"',"
-                + " '"+proveedor.getCorreoProveedores()+"');";
+                + " '"+proveedor.getCorreoProveedores()+"',"
+                + " '"+proveedor.getDireccionProveedores()+"');";
         try{
             ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
@@ -147,6 +140,7 @@ public class Proveedorbd {
                 c.setApellidoRepresentanteLegal(rs.getString(6));
                 c.setTelefonoProveedor(rs.getString(7));
                 c.setCorreoProveedores(rs.getString(8));
+                c.setDireccionProveedores(rs.getString(9));
                 listaProveedores.add(c);
             }
             stm.close();
@@ -167,7 +161,7 @@ public class Proveedorbd {
         ResultSet rs = null;
         Proveedores c = null;
         List<Proveedores> listaProveedores = new ArrayList<Proveedores>();
-        String sql = "Select * from proveedores WHERE ruc like "+ruc+";";
+        String sql = "Select * from proveedores WHERE ruc like \"%"+ruc+"%\";";
         try {
             co = new ConexionBD().ConexionBD();
             stm = co.createStatement();
@@ -200,7 +194,7 @@ public class Proveedorbd {
         ResultSet rs = null;
         Proveedores c = null;
         List<Proveedores> listaProveedores = new ArrayList<Proveedores>();
-        String sql = "Select * from proveedores WHERE nombre_representante_legal like "+nombre+";";
+        String sql = "Select * from proveedores WHERE nombre_representante_legal like \"%"+nombre+"%\";";
         try {
             co = new ConexionBD().ConexionBD();
             stm = co.createStatement();

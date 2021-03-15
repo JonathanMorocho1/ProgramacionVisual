@@ -23,10 +23,11 @@ public class GestionProveedores {
     private JTextField txtApellidoRepresentanteLegal;
     private JTextField txtTelefonoProveedores;
     private JTextField txtCorreoProveedores;
+    private JTextField txtDireccionProveedores;
     private Utilidades utilidades;
     private JFrame frameGestionContable;
 
-    public GestionProveedores(JTextField txtRuc, JTextField txtRazonSocial, JTextField txtTipoActividad, JTextField txtNombreRepresentanteLegal, JTextField txtApellidoRepresentanteLegal, JTextField txtTelefonoProveedores, JTextField txtCorreoProveedores) {
+    public GestionProveedores(JTextField txtRuc, JTextField txtRazonSocial, JTextField txtTipoActividad, JTextField txtNombreRepresentanteLegal, JTextField txtApellidoRepresentanteLegal, JTextField txtTelefonoProveedores, JTextField txtCorreoProveedores, JTextField txtDireccionProveedores, Utilidades utilidades, JFrame frameGestionContable) {
         this.txtRuc = txtRuc;
         this.txtRazonSocial = txtRazonSocial;
         this.txtTipoActividad = txtTipoActividad;
@@ -34,8 +35,14 @@ public class GestionProveedores {
         this.txtApellidoRepresentanteLegal = txtApellidoRepresentanteLegal;
         this.txtTelefonoProveedores = txtTelefonoProveedores;
         this.txtCorreoProveedores = txtCorreoProveedores;
+        this.txtDireccionProveedores = txtDireccionProveedores;
+        this.utilidades = utilidades;
         this.frameGestionContable = frameGestionContable;
     }
+
+    
+
+    
 
     
 
@@ -95,6 +102,14 @@ public class GestionProveedores {
         this.txtCorreoProveedores = txtCorreoProveedores;
     }
 
+    public JTextField getTxtDireccionProveedores() {
+        return txtDireccionProveedores;
+    }
+
+    public void setTxtDireccionProveedores(JTextField txtDireccionProveedores) {
+        this.txtDireccionProveedores = txtDireccionProveedores;
+    }
+
     public JFrame getFrameGestionContable() {
         return frameGestionContable;
     }
@@ -110,22 +125,22 @@ public class GestionProveedores {
             return null;
         }
         if (txtRazonSocial.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo nombre no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo RazonSocial no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtRazonSocial.requestFocus();
             return null;
         }
         if (txtTipoActividad.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo apellido no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo TipodeActvidad no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtTipoActividad.requestFocus();
             return null;
         }
         if (txtNombreRepresentanteLegal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo direccion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Nombre no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtNombreRepresentanteLegal.requestFocus();
             return null;
         }
         if (txtApellidoRepresentanteLegal.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo correo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo Apellido no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtApellidoRepresentanteLegal.requestFocus();
             return null;
         }
@@ -136,11 +151,16 @@ public class GestionProveedores {
             return null;
         }
         if (txtCorreoProveedores.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(frameGestionContable, "El campo telefono no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo correo no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtCorreoProveedores.requestFocus();
             return null;
         }
-    
+        if (txtDireccionProveedores.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(frameGestionContable, "El campo direccion no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDireccionProveedores.requestFocus();
+            return null;
+        }
+        
         Proveedores proveedor = new Proveedores();
         proveedor.setRuc(txtRuc.getText());
         proveedor.setRazonSocial(txtRazonSocial.getText());
@@ -149,6 +169,7 @@ public class GestionProveedores {
         proveedor.setApellidoRepresentanteLegal(txtApellidoRepresentanteLegal.getText());
         proveedor.setTelefonoProveedor(txtTelefonoProveedores.getText());
         proveedor.setCorreoProveedores(txtCorreoProveedores.getText());
+        proveedor.setDireccionProveedores(txtDireccionProveedores.getText());
         System.out.println(proveedor.toString());
         return proveedor;
     }
