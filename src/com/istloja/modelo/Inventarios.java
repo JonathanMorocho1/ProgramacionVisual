@@ -5,6 +5,8 @@
  */
 package com.istloja.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author ANDRES
@@ -19,12 +21,11 @@ public class Inventarios {
     private String precioMayorista;
     private String precioClienteFijo;
     private String precioClienteNormal;
+    private Date fechaRegistro;
+    private Date fechaActualizacion;
+    private Date fechaVencimiento;
 
-    public Inventarios(int idInventario, String codigoProducto,
-            String cantidadProductos, String descripcion, 
-            String preciosCompra_sinIva, String preciosCompra_conIva,
-            String precioMayorista, String precioClienteFijo,
-            String precioClienteNormal) {
+    public Inventarios(int idInventario, String codigoProducto, String cantidadProductos, String descripcion, String preciosCompra_sinIva, String preciosCompra_conIva, String precioMayorista, String precioClienteFijo, String precioClienteNormal, Date fechaRegistro, Date fechaActualizacion, Date fechaVencimiento) {
         this.idInventario = idInventario;
         this.codigoProducto = codigoProducto;
         this.cantidadProductos = cantidadProductos;
@@ -34,8 +35,11 @@ public class Inventarios {
         this.precioMayorista = precioMayorista;
         this.precioClienteFijo = precioClienteFijo;
         this.precioClienteNormal = precioClienteNormal;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaActualizacion = fechaActualizacion;
+        this.fechaVencimiento = fechaVencimiento;
     }
-      
+     
     public Inventarios(){
     
     }
@@ -112,21 +116,33 @@ public class Inventarios {
         this.precioClienteNormal = precioClienteNormal;
     }
 
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
     @Override
     public String toString() {
-        return "Inventarios{" + "idInventario=" + idInventario +
-                ", codigoProducto=" + codigoProducto +
-                ", cantidadProductos=" + cantidadProductos +
-                ", descripcion=" + descripcion +
-                ", preciosCompra_sinIva=" + preciosCompra_sinIva +
-                ", preciosCompra_conIva=" + preciosCompra_conIva + 
-                ", precioMayorista=" + precioMayorista +
-                ", precioClienteFijo=" + precioClienteFijo +
-                ", precioClienteNormal=" + precioClienteNormal + '}';
-    }
-    
-    public Inventarios get(int rowIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return "Inventarios{" + "idInventario=" + idInventario + ", codigoProducto=" + codigoProducto + ", cantidadProductos=" + cantidadProductos + ", descripcion=" + descripcion + ", preciosCompra_sinIva=" + preciosCompra_sinIva + ", preciosCompra_conIva=" + preciosCompra_conIva + ", precioMayorista=" + precioMayorista + ", precioClienteFijo=" + precioClienteFijo + ", precioClienteNormal=" + precioClienteNormal + ", fechaRegistro=" + fechaRegistro + ", fechaActualizacion=" + fechaActualizacion + ", fechaVencimiento=" + fechaVencimiento + '}';
+    }   
 
 }

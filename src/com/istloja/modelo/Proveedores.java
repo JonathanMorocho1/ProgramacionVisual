@@ -5,6 +5,8 @@
  */
 package com.istloja.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author ANDRES
@@ -19,8 +21,11 @@ public class Proveedores {
     private String telefonoProveedor;
     private String correoProveedores;
     private String direccionProveedores;
+    private Date fechaRegistro;
+    private Date fechaActualizacion;
+    private Date fechaVencimiento;
 
-    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String apellidoRepresentanteLegal, String telefonoProveedor, String correoProveedores, String direccionProveedores) {
+    public Proveedores(int idProveedores, String ruc, String razonSocial, String tipoActividad, String nombreRepresentanteLegal, String apellidoRepresentanteLegal, String telefonoProveedor, String correoProveedores, String direccionProveedores, Date fechaRegistro, Date fechaActualizacion, Date fechaVencimiento) {
         this.idProveedores = idProveedores;
         this.ruc = ruc;
         this.razonSocial = razonSocial;
@@ -30,9 +35,12 @@ public class Proveedores {
         this.telefonoProveedor = telefonoProveedor;
         this.correoProveedores = correoProveedores;
         this.direccionProveedores = direccionProveedores;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaActualizacion = fechaActualizacion;
+        this.fechaVencimiento = fechaVencimiento;
     }
 
-        
+       
     public Proveedores() {
     }
     
@@ -110,10 +118,41 @@ public class Proveedores {
         this.direccionProveedores = direccionProveedores;
     }
 
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
     @Override
     public String toString() {
-        return "Proveedores{" + "idProveedores=" + idProveedores +", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad + ", nombreRepresentanteLegal=" + nombreRepresentanteLegal + ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal + ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores + ", direccionProveedores=" + direccionProveedores + '}';
-    }
-    
-    
+        return "Proveedores{" + "idProveedores=" + idProveedores +
+                ", ruc=" + ruc + ", razonSocial=" + razonSocial + ", tipoActividad=" + tipoActividad +
+                ", nombreRepresentanteLegal=" + nombreRepresentanteLegal +
+                ", apellidoRepresentanteLegal=" + apellidoRepresentanteLegal +
+                ", telefonoProveedor=" + telefonoProveedor + ", correoProveedores=" + correoProveedores +
+                ", direccionProveedores=" + direccionProveedores + 
+                ", fechaRegistro=" + fechaRegistro + ", fechaActualizacion=" + fechaActualizacion +
+                ", fechaVencimiento=" + fechaVencimiento + '}';
+    }   
+
+        
 }

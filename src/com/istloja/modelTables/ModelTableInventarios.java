@@ -18,7 +18,7 @@ public class ModelTableInventarios extends AbstractTableModel{
     private String[] m_colNames = {"CODIGO", "CANTIDAD PRODUCTOS",
         "DESCRIPCIÓN", "PRECIOS COMPRA(sinIva)",
         "PRECIOS Compra(conIva)", "Precio Mayorista",
-        "Precio Cliente Fijo", "Precio Cliente Normal"};
+        "Precio Cliente Fijo", "Precio Cliente Normal", "Fecha Caducidad"};
     private List<Inventarios>inventarios; //Lista para mostrar personas
     private GestionPersonaV1 gContable;
     
@@ -58,6 +58,8 @@ public class ModelTableInventarios extends AbstractTableModel{
                 return inventario.getPrecioClienteFijo();
             case 7:
                 return inventario.getPrecioClienteNormal();
+            case 8:
+                return inventario.getFechaVencimiento();
         }
         return new String();
     }

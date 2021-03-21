@@ -9,6 +9,7 @@ import com.istloja.conexion.ConexionBD;
 import com.istloja.modelo.Inventarios;
 import com.istloja.modelo.Persona;
 import com.istloja.modelo.Proveedores;
+import com.istloja.modelo.Utilidades;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +22,12 @@ import java.util.List;
  * @author ANDRES
  */
 public class Inventariosbd {
+    
+    public Utilidades utilidades;
+
+    public Inventariosbd() {
+        utilidades = new Utilidades();
+    }
     //Metodo que resive para registrar una persona
     public boolean CrearInventario(Inventarios inventarios){
         boolean registrar = false;
@@ -29,11 +36,13 @@ public class Inventariosbd {
         //Conexion con la base de datos
         Connection con = null;
         //INSERT INTO ejercici
-        
-         String sql = "INSERT INTO `bdejercicio1`.`inventarios` "
+        String sql;
+        if(inventarios.getFechaVencimiento() == null){
+        sql = "INSERT INTO `bdejercicio1`.`inventarios` "
                  + "(`codigo_pro`,`can_productos`, `descripcion`,"
                  + " `precios_compra_sin_iva`, `precios_compra_con_iva`,"
-                 + " `precio_mayorista`, `precio_cliente_fijo`,`precio_cliente_normal`) "
+                 + " `precio_mayorista`, `precio_cliente_fijo`,`precio_cliente_normal`, "
+                 + " `fecha_registro`)"
                 + "VALUES ('" + inventarios.getCodigoProducto() +  "','"
                 + "" + inventarios.getCantidadProductos()+ "','"
                 + "" + inventarios.getDescripcion() + "', '"
@@ -41,7 +50,25 @@ public class Inventariosbd {
                 + "" + inventarios.getPreciosCompra_conIva()+ "', '"
                 + "" + inventarios.getPrecioMayorista()+ "','"
                 + "" + inventarios.getPrecioClienteFijo()+"','"
-                + "" + inventarios.getPrecioClienteNormal()+"')";
+                + "" + inventarios.getPrecioClienteNormal()+"','"
+                + "" + utilidades.devolverFecha(inventarios.getFechaRegistro())+"')";
+        }else{
+            sql = "INSERT INTO `bdejercicio1`.`inventarios` "
+                 + "(`codigo_pro`,`can_productos`, `descripcion`,"
+                 + " `precios_compra_sin_iva`, `precios_compra_con_iva`,"
+                 + " `precio_mayorista`, `precio_cliente_fijo`,`precio_cliente_normal`, "
+                 + " `fecha_registro`, `fecha_vencimiento`)"   
+                + "VALUES ('" + inventarios.getCodigoProducto() +  "','"
+                + "" + inventarios.getCantidadProductos()+ "','"
+                + "" + inventarios.getDescripcion() + "', '"
+                + "" + inventarios.getPreciosCompra_sinIva()+ "', '"
+                + "" + inventarios.getPreciosCompra_conIva()+ "', '"
+                + "" + inventarios.getPrecioMayorista()+ "','"
+                + "" + inventarios.getPrecioClienteFijo()+"','"
+                + "" + inventarios.getPrecioClienteNormal()+"','"
+                + "" + utilidades.devolverFecha(inventarios.getFechaRegistro())+"','"
+                + "" + utilidades.devolverFecha(inventarios.getFechaVencimiento())+"')";
+        }
         try{
             ConexionBD conexion = new ConexionBD();
             con = conexion.ConexionBD();
@@ -104,6 +131,8 @@ public class Inventariosbd {
                "', `precio_mayorista` = '" + inventarios.getPrecioMayorista()+
                "', `precio_cliente_fijo` = '" + inventarios.getPrecioClienteFijo()+
                "', `precio_cliente_normal` = '" + inventarios.getPrecioClienteNormal()+
+               "', `fecha_actualizacion` = '" +utilidades.devolverFecha(inventarios.getFechaActualizacion())+
+               "', `fecha_vencimiento` = '" +utilidades.devolverFecha(inventarios.getFechaVencimiento())+
                "' WHERE (`id_inventario` = '"+ inventarios.getIdInventario() + "');";
  
         try{
@@ -148,6 +177,9 @@ public class Inventariosbd {
                 c.setPrecioMayorista(rs.getString(7));
                 c.setPrecioClienteFijo(rs.getString(8));
                 c.setPrecioClienteNormal(rs.getString(9));
+                c.setFechaRegistro(rs.getDate(10));
+                c.setFechaActualizacion(rs.getDate(11));
+                c.setFechaVencimiento(rs.getDate(12));
                 listaInventarios.add(c);
             }
             stm.close();
@@ -183,6 +215,9 @@ public class Inventariosbd {
                 c.setPrecioMayorista(rs.getString(7));
                 c.setPrecioClienteFijo(rs.getString(8));
                 c.setPrecioClienteNormal(rs.getString(9));
+                c.setFechaRegistro(rs.getDate(10));
+                c.setFechaActualizacion(rs.getDate(11));
+                c.setFechaVencimiento(rs.getDate(12));
                 listaInventarios.add(c);
             }
             stm.close();
@@ -218,6 +253,9 @@ public class Inventariosbd {
                 c.setPrecioMayorista(rs.getString(7));
                 c.setPrecioClienteFijo(rs.getString(8));
                 c.setPrecioClienteNormal(rs.getString(9));
+                c.setFechaRegistro(rs.getDate(10));
+                c.setFechaActualizacion(rs.getDate(11));
+                c.setFechaVencimiento(rs.getDate(12));
                 listaInventarios.add(c);
             }
             stm.close();

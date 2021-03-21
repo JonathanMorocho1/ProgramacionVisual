@@ -7,6 +7,8 @@ package com.istloja.vistas;
 
 import com.istloja.modelo.Inventarios;
 import com.istloja.modelo.Persona;
+import com.toedter.calendar.JDateChooser;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,13 +26,10 @@ public class GestionInventarios {
     private JTextField txtPrecioMayorista;
     private JTextField txtPrecioClienteFijo;
     private JTextField txtPrecioClienteNormal;
+    private JDateChooser JDateFechaVencimientoInventarios;
     private JFrame frameGestionContable;
 
-    public GestionInventarios(JTextField txtCodigoProducto,
-            JTextField txtCantidadProductos, JTextField txtDescripcion,
-            JTextField txtPreciosCompraSinIva, JTextField txtPreciosCompraConIva,
-            JTextField txtPrecioMayorista, JTextField txtPrecioClienteFijo,
-            JTextField txtPrecioClienteNormal, JFrame frameGestionContable) {
+    public GestionInventarios(JTextField txtCodigoProducto, JTextField txtCantidadProductos, JTextField txtDescripcion, JTextField txtPreciosCompraSinIva, JTextField txtPreciosCompraConIva, JTextField txtPrecioMayorista, JTextField txtPrecioClienteFijo, JTextField txtPrecioClienteNormal, JDateChooser JDateFechaVencimientoInventarios, JFrame frameGestionContable) {
         this.txtCodigoProducto = txtCodigoProducto;
         this.txtCantidadProductos = txtCantidadProductos;
         this.txtDescripcion = txtDescripcion;
@@ -39,6 +38,7 @@ public class GestionInventarios {
         this.txtPrecioMayorista = txtPrecioMayorista;
         this.txtPrecioClienteFijo = txtPrecioClienteFijo;
         this.txtPrecioClienteNormal = txtPrecioClienteNormal;
+        this.JDateFechaVencimientoInventarios = JDateFechaVencimientoInventarios;
         this.frameGestionContable = frameGestionContable;
     }
 
@@ -106,6 +106,14 @@ public class GestionInventarios {
         this.txtPrecioClienteNormal = txtPrecioClienteNormal;
     }
 
+    public JDateChooser getJDateFechaVencimientoInventarios() {
+        return JDateFechaVencimientoInventarios;
+    }
+
+    public void setJDateFechaVencimientoInventarios(JDateChooser JDateFechaVencimientoInventarios) {
+        this.JDateFechaVencimientoInventarios = JDateFechaVencimientoInventarios;
+    }
+    
     public JFrame getFrameGestionContable() {
         return frameGestionContable;
     }
@@ -115,7 +123,7 @@ public class GestionInventarios {
     }
 
     
-    public Inventarios guardarEditarInventario(){
+    public Inventarios guardarEditarInventario(boolean isEditarInventarios){
         if (txtCodigoProducto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frameGestionContable, "El campo cedula no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoProducto.requestFocus();
@@ -171,6 +179,12 @@ public class GestionInventarios {
         inventarios.setPrecioMayorista(txtPrecioMayorista.getText());
         inventarios.setPrecioClienteFijo(txtPrecioClienteFijo.getText());
         inventarios.setPrecioClienteNormal(txtPrecioClienteNormal.getText());
+        if(isEditarInventarios){
+            inventarios.setFechaActualizacion(new Date());
+        }else {
+            inventarios.setFechaRegistro(new Date());
+        }
+        inventarios.setFechaVencimiento(JDateFechaVencimientoInventarios.getDate());
         System.out.println(inventarios.toString());
         return inventarios;
     }

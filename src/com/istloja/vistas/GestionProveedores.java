@@ -7,6 +7,9 @@ package com.istloja.vistas;
 
 import com.istloja.modelo.Proveedores;
 import com.istloja.modelo.Utilidades;
+import com.toedter.calendar.JDateChooser;
+//import java.sql.Date;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,9 +28,10 @@ public class GestionProveedores {
     private JTextField txtCorreoProveedores;
     private JTextField txtDireccionProveedores;
     private Utilidades utilidades;
+    private JDateChooser JDateFechaVencimientoProveedores;
     private JFrame frameGestionContable;
 
-    public GestionProveedores(JTextField txtRuc, JTextField txtRazonSocial, JTextField txtTipoActividad, JTextField txtNombreRepresentanteLegal, JTextField txtApellidoRepresentanteLegal, JTextField txtTelefonoProveedores, JTextField txtCorreoProveedores, JTextField txtDireccionProveedores, Utilidades utilidades, JFrame frameGestionContable) {
+    public GestionProveedores(JTextField txtRuc, JTextField txtRazonSocial, JTextField txtTipoActividad, JTextField txtNombreRepresentanteLegal, JTextField txtApellidoRepresentanteLegal, JTextField txtTelefonoProveedores, JTextField txtCorreoProveedores, JTextField txtDireccionProveedores, Utilidades utilidades, JDateChooser JDateFechaVencimientoProveedores, JFrame frameGestionContable) {
         this.txtRuc = txtRuc;
         this.txtRazonSocial = txtRazonSocial;
         this.txtTipoActividad = txtTipoActividad;
@@ -37,10 +41,11 @@ public class GestionProveedores {
         this.txtCorreoProveedores = txtCorreoProveedores;
         this.txtDireccionProveedores = txtDireccionProveedores;
         this.utilidades = utilidades;
+        this.JDateFechaVencimientoProveedores = JDateFechaVencimientoProveedores;
         this.frameGestionContable = frameGestionContable;
     }
 
-    
+     
 
     
 
@@ -118,7 +123,23 @@ public class GestionProveedores {
         this.frameGestionContable = frameGestionContable;
     }
 
-    public Proveedores guardarEditarProveedores(){
+    public Utilidades getUtilidades() {
+        return utilidades;
+    }
+
+    public void setUtilidades(Utilidades utilidades) {
+        this.utilidades = utilidades;
+    }
+
+    public JDateChooser getJDateFechaVencimientoProveedores() {
+        return JDateFechaVencimientoProveedores;
+    }
+
+    public void setJDateFechaVencimientoProveedores(JDateChooser JDateFechaVencimientoProveedores) {
+        this.JDateFechaVencimientoProveedores = JDateFechaVencimientoProveedores;
+    }
+    
+    public Proveedores guardarEditarProveedores(boolean isEditarProveedores){
         if (txtRuc.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frameGestionContable, "El campo ruc no tiene datos", "Error", JOptionPane.ERROR_MESSAGE);
             txtRuc.requestFocus();
@@ -170,6 +191,12 @@ public class GestionProveedores {
         proveedor.setTelefonoProveedor(txtTelefonoProveedores.getText());
         proveedor.setCorreoProveedores(txtCorreoProveedores.getText());
         proveedor.setDireccionProveedores(txtDireccionProveedores.getText());
+        if(isEditarProveedores){
+            proveedor.setFechaActualizacion(new Date());
+        }else {
+            proveedor.setFechaRegistro(new Date());
+        }
+        proveedor.setFechaVencimiento(JDateFechaVencimientoProveedores.getDate());
         System.out.println(proveedor.toString());
         return proveedor;
     }
