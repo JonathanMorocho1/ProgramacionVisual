@@ -191,7 +191,7 @@ public class Inventariosbd {
 
         return listaInventarios;
     }
-    
+   
     public List<Inventarios> buscarInvetarioCodigoCombo(String codigo) {
         Connection co = null;
         Statement stm = null;
@@ -227,6 +227,41 @@ public class Inventariosbd {
             System.out.println("Error:"+ e.getMessage());
         }
         return listaInventarios;
+    }
+    
+    public Inventarios buscarInventarioPorCodigo(String Ccdigo) {
+        Connection co = null;
+        Statement stm = null;
+        //Sentencia de JDBC para obtener valores de la base de datos.
+        ResultSet rs = null;
+        Inventarios c = null;
+        String sql = "Select * from inventarios WHERE codigo_pro like "+Ccdigo+";";
+        try {
+            co = new ConexionBD().ConexionBD();
+            stm = co.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                c = new Inventarios();
+                c.setIdInventario(rs.getInt(1));
+                c.setCodigoProducto(rs.getString(2));
+                c.setCantidadProductos(rs.getString(3));
+                c.setDescripcion(rs.getString(4));
+                c.setPreciosCompra_sinIva(rs.getString(5));
+                c.setPreciosCompra_conIva(rs.getString(6));
+                c.setPrecioMayorista(rs.getString(7));
+                c.setPrecioClienteFijo(rs.getString(8));
+                c.setPrecioClienteNormal(rs.getString(9));
+                c.setFechaRegistro(rs.getDate(10));
+                c.setFechaActualizacion(rs.getDate(11));
+                c.setFechaVencimiento(rs.getDate(12));
+            }
+            stm.close();
+            rs.close();
+            co.close();
+        } catch (SQLException e) {
+            System.out.println("Error:"+ e.getMessage());
+        }
+        return c;
     }
     
     
