@@ -60,7 +60,7 @@ public class ModelTablePersona extends AbstractTableModel{
         }
         return new String();
     }
-//Sirve para definir los nombres de las columnas
+    //Sirve para definir los nombres de las columnas
     @Override
     public String getColumnName(int column) {
         return m_colNames[column]; //To change body of generated methods, choose Tools | Templates.

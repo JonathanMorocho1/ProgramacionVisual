@@ -24,6 +24,8 @@ public class Inventarios {
     private Date fechaRegistro;
     private Date fechaActualizacion;
     private Date fechaVencimiento;
+    
+    private int CantidadProductosVender;
 
     public Inventarios(int idInventario, String codigoProducto, String cantidadProductos, String descripcion, String preciosCompra_sinIva, String preciosCompra_conIva, String precioMayorista, String precioClienteFijo, String precioClienteNormal, Date fechaRegistro, Date fechaActualizacion, Date fechaVencimiento) {
         this.idInventario = idInventario;
@@ -138,6 +140,14 @@ public class Inventarios {
 
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public int getCantidadProductosVender() {
+        return CantidadProductosVender;
+    }
+
+    public void setCantidadProductosVender(int CantidadProductosVender) {
+        this.CantidadProductosVender = CantidadProductosVender;
     }
 
     @Override

@@ -229,13 +229,13 @@ public class Inventariosbd {
         return listaInventarios;
     }
     
-    public Inventarios buscarInventarioPorCodigo(String Ccdigo) {
+    public Inventarios buscarInventarioPorCodigo(String Codigo) {
         Connection co = null;
         Statement stm = null;
         //Sentencia de JDBC para obtener valores de la base de datos.
         ResultSet rs = null;
         Inventarios c = null;
-        String sql = "Select * from inventarios WHERE codigo_pro like "+Ccdigo+";";
+        String sql = "Select * from inventarios WHERE codigo_pro like "+Codigo+";";
         try {
             co = new ConexionBD().ConexionBD();
             stm = co.createStatement();
